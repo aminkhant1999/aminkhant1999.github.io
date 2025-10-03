@@ -109,11 +109,11 @@
 	list-style	: none;
 	padding		: 5px 0px;
 	}
-.two-columns-list li .years{
+.two-columns-list li .title{
 	width		: 20%;
 	}
-.two-columns-list li .years,
-.two-columns-list li .company-name{
+.two-columns-list li .title,
+.two-columns-list li .lllist{
 	float		: left;
 	}
 .skill-metrics{
@@ -237,3 +237,4 @@
 	page-break-before: always;
 	margin-top: 100px;
 }
+
