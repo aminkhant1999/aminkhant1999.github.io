@@ -220,7 +220,7 @@
   function ensureRAF(){if(!rafStarted){rafStarted=true;lastTime=performance.now();requestAnimationFrame(loop);}}
   function start(){running=true;gameOver=false;lastTime=performance.now();acc=0;}
   function togglePause(){if(gameOver||!hasStarted)return;running=!running;if(running){lastTime=performance.now();acc=0;}}
-  function hardRestart(){reset();start();}
+  function hardRestart(){reset(); hasStarted = true; start();}
 
   function loop(t){
     if(!lastTime)lastTime=t;
