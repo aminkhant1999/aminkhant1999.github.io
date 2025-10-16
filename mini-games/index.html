@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mini Games Hub</title>
+<meta name="description" content="Play quick browser mini games: Card Memory, Tic-Tac-Toe, Rock–Paper–Scissors, and Snake." />
+<style>
+  :root{
+    --bg:#0b1220; --panel:#0f172a; --card:#0c1626; --muted:#94a3b8; --text:#e5e7eb;
+    --accent:#38bdf8; --accent-2:#22c55e; --border:#1e2a41; --hover:#122036;
+  }
+  *{ box-sizing:border-box }
+  html,body{ height:100% }
+  body{
+    margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    color:var(--text);
+    background: radial-gradient(1100px 800px at 70% -10%, #162036, var(--bg));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .wrap{
+    width:min(1100px,94vw); padding:24px;
+  }
+  header{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px;
+  }
+  h1{ margin:0; font-size:clamp(26px,4.5vw,40px); letter-spacing:.3px }
+  .sub{ color:var(--muted); font-size:14px }
+  .grid{
+    display:grid; gap:16px;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .card{
+    grid-column: span 12;
+    background:linear-gradient(180deg, var(--card), #0a1324);
+    border:1px solid var(--border); border-radius:16px; padding:18px;
+    display:grid; grid-template-columns: 80px 1fr auto; align-items:center; gap:16px;
+    transition: transform .12s ease, background .2s ease, border-color .2s ease;
+  }
+  .card:hover{ transform: translateY(-2px); background:var(--hover); border-color:#2a3b5d }
+  .icon{
+    width:68px; height:68px; display:grid; place-items:center; font-size:34px;
+    background:#0d192d; border:1px solid var(--border); border-radius:14px;
+  }
+  .meta h2{ margin:0 0 6px; font-size:20px }
+  .meta p{ margin:0; color:var(--muted); font-size:14px }
+  .actions{ display:flex; gap:8px; flex-wrap:wrap }
+  a.btn, button.btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer;
+    background:#122036; color:var(--text); border:1px solid #263650; padding:10px 12px; border-radius:10px; font-size:14px;
+    transition: background .2s, border-color .2s, transform .08s;
+  }
+  a.btn:hover, button.btn:hover{ background:#162745; border-color:#38557b }
+  a.primary{ background:#0f2333; border-color:#2a4a6a }
+  a.primary:hover{ background:#15314a; border-color:#3a6a95 }
+  footer{ margin-top:14px; text-align:center; color:var(--muted); font-size:12px }
+  @media (min-width:700px){
+    .card{ grid-column: span 6; }
+  }
+  @media (min-width:1000px){
+    .card{ grid-column: span 6; }
+  }
+
+  /* Modal (dialog) styling */
+  dialog{
+    border:none; border-radius:14px; padding:0; width:min(560px, 92vw); color:var(--text);
+    background:linear-gradient(180deg, var(--panel), #0b1324); box-shadow:0 20px 60px rgba(0,0,0,.55);
+    border:1px solid var(--border);
+  }
+  .dlg-head{ padding:14px 16px; border-bottom:1px solid var(--border); font-weight:700; }
+  .dlg-body{ padding:14px 16px; color:var(--muted); font-size:14px; }
+  .dlg-actions{ padding:12px 16px; display:flex; justify-content:flex-end; border-top:1px solid var(--border); }
+  .close{ background:#1b2a44; border-color:#2a3e62 }
+  dialog::backdrop{ background: rgba(0,0,0,.55) }
+
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f5f7fb; --panel:#ffffff; --card:#ffffff; --text:#0b1320; --muted:#55627a; --border:#d7dfeb; --hover:#f3f7ff }
+    body{ background:#f3f6fb; }
+    .icon{ background:#f3f7ff; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div>
+        <h1>🎮 Mini Games Hub</h1>
+        <div class="sub">Quick, lightweight games — no installs. Works offline once loaded.</div>
+      </div>
+      <div class="sub" aria-hidden="true">Use keyboard or touch • Best in modern browsers</div>
+    </header>
+
+    <section class="grid" aria-label="Games list">
+      <!-- Memory Game -->
+      <article class="card" role="article">
+        <div class="icon" aria-hidden="true">🧠</div>
+        <div class="meta">
+          <h2>Card Memory</h2>
+          <p>Flip cards to find matching pairs. Improves focus and short-term memory.</p>
+        </div>
+        <div class="actions" role="group" aria-label="Card Memory actions">
+          <a class="btn primary" href="memory-game/index.html">Play</a>
+          <button class="btn" data-rules="memory">Rules</button>
+        </div>
+      </article>
+
+      <!-- Tic-Tac-Toe -->
+      <article class="card" role="article">
+        <div class="icon" aria-hidden="true">❌⭕</div>
+        <div class="meta">
+          <h2>Tic-Tac-Toe</h2>
+          <p>Classic X vs O. First to make a line wins. Great for quick two-player matches.</p>
+        </div>
+        <div class="actions" role="group" aria-label="Tic-Tac-Toe actions">
+          <a class="btn primary" href="tic-tac-toe/index.html">Play</a>
+          <button class="btn" data-rules="tictactoe">Rules</button>
+        </div>
+      </article>
+
+      <!-- Rock–Paper–Scissors -->
+      <article class="card" role="article">
+        <div class="icon" aria-hidden="true" style="font-size: 22px;">🪨📄✂️</div>
+        <div class="meta">
+          <h2>Rock–Paper–Scissors</h2>
+          <p>Beat the CPU in a best-of series. Rock beats Scissors; Paper beats Rock.</p>
+        </div>
+        <div class="actions" role="group" aria-label="Rock–Paper–Scissors actions">
+          <a class="btn primary" href="rock-paper-scissors/index.html">Play</a>
+          <button class="btn" data-rules="rps">Rules</button>
+        </div>
+      </article>
+
+      <!-- Snake -->
+      <article class="card" role="article">
+        <div class="icon" aria-hidden="true">🐍</div>
+        <div class="meta">
+          <h2>Snake</h2>
+          <p>Eat food, grow longer, avoid crashing. Arrow keys or WASD. High score saved.</p>
+        </div>
+        <div class="actions" role="group" aria-label="Snake actions">
+          <a class="btn primary" href="snake-game/index.html">Play</a>
+          <button class="btn" data-rules="snake">Rules</button>
+        </div>
+      </article>
+    </section>
+
+    <footer>© <span id="year"></span> Mini Games. Built with HTML, CSS & JS.</footer>
+  </main>
+
+  <!-- Reusable Rules Dialog -->
+  <dialog id="rulesDlg" aria-labelledby="dlgTitle">
+    <div class="dlg-head" id="dlgTitle">Game Rules</div>
+    <div class="dlg-body" id="dlgBody">Loading…</div>
+    <div class="dlg-actions">
+      <button class="btn close" id="closeDlg">Close</button>
+    </div>
+  </dialog>
+
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Simple rules content
+  const RULES = {
+    memory: `
+      <strong>Card Memory</strong><br><br>
+      • Click two cards to flip them.<br>
+      • If they match, they stay face up; otherwise they flip back.<br>
+      • Clear the board in the fewest moves.<br><br>
+      <em>Tip:</em> Say the positions out loud to help remember!
+    `,
+    tictactoe: `
+      <strong>Tic-Tac-Toe</strong><br><br>
+      • Two players place X and O on a 3×3 grid.<br>
+      • First to align three (row, column, or diagonal) wins.<br>
+      • If the grid fills with no winner, it’s a draw.<br><br>
+      <em>Strategy:</em> Take the center when you can.
+    `,
+    rps: `
+      <strong>Rock–Paper–Scissors</strong><br><br>
+      • Rock beats Scissors • Scissors beats Paper • Paper beats Rock.<br>
+      • Choose your move; the CPU chooses randomly.<br>
+      • Win the set by reaching the target first.<br><br>
+      <em>Tip:</em> Avoid repeating your last losing move.
+    `,
+    snake: `
+      <strong>Snake</strong><br><br>
+      • Use Arrow Keys or WASD to move.<br>
+      • Eat food to grow; avoid walls and your body.<br>
+      • Game ends on collision; high score is saved.<br><br>
+      <em>Pro:</em> Plan turns early — don’t trap your head!
+    `
+  };
+
+  const dlg = document.getElementById('rulesDlg');
+  const dlgBody = document.getElementById('dlgBody');
+  const dlgTitle = document.getElementById('dlgTitle');
+  document.querySelectorAll('button[data-rules]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.getAttribute('data-rules');
+      dlgTitle.textContent = 'Rules — ' + ({
+        memory:'Card Memory',
+        tictactoe:'Tic-Tac-Toe',
+        rps:'Rock–Paper–Scissors',
+        snake:'Snake'
+      }[key] || 'Game');
+      dlgBody.innerHTML = RULES[key] || 'No rules available.';
+      dlg.showModal();
+    });
+  });
+  document.getElementById('closeDlg').addEventListener('click', ()=> dlg.close());
+  dlg.addEventListener('cancel', (e)=>{ e.preventDefault(); dlg.close(); });
+</script>
+</body>
+</html>
