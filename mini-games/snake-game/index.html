@@ -14,7 +14,7 @@
     color: var(--text);
   }
   .wrap {
-    width: min(640px, 94vw);
+    width: min(680px, 94vw);
     background: linear-gradient(180deg, var(--panel), #0a1324);
     border: 1px solid #1a2336; border-radius: 16px; padding: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -32,7 +32,10 @@
   .badge small { display:block; color:var(--muted); font-weight:500; font-size:11px; }
   .board {
     background: var(--grid); border:1px solid #1e2a41; border-radius:12px; padding:10px;
+    /* Important: prevent page scroll on swipe */
+    touch-action: none;
   }
+  /* Make the canvas responsive & square. Height will be set by JS; width is fluid. */
   canvas { display:block; width:100%; height:auto; border-radius:8px; background:#0b1324; }
   .panel {
     display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:10px; flex-wrap:wrap;
@@ -79,7 +82,8 @@
       </div>
     </header>
 
-    <div class="board">
+    <div class="board" id="board">
+      <!-- Canvas size is responsive; JS manages internal resolution for crispness -->
       <canvas id="canvas" width="400" height="400" aria-label="Snake game area"></canvas>
     </div>
 
@@ -97,20 +101,22 @@
       </div>
     </div>
 
-    <div class="hint">Controls: Arrow keys / WASD • Pause: Space • Restart: R</div>
+    <div class="hint">Controls: Arrow keys / WASD • Pause: Space • Restart: R • Swipe to move on touch screens</div>
   </div>
 
 <script>
 (() => {
   // ----- Config -----
-  const GRID = 20;              // grid size (20x20)
-  const TILE = 20;              // px per cell (canvas base size 400x400)
-  const CANVAS_BASE = GRID * TILE;
+  const GRID = 20;              // logical grid (20x20)
+  let TILE = 20;                // pixels per cell (computed responsively)
+  let CANVAS_CSS = GRID * TILE; // CSS pixels (square side, computed)
+
   const SNAKE_COLOR = getCSS('--snake') || '#22c55e';
   const HEAD_COLOR  = getCSS('--head')  || '#16a34a';
   const FOOD_COLOR  = getCSS('--food')  || '#f97316';
 
   // ----- DOM -----
+  const board   = document.getElementById('board');
   const canvas  = document.getElementById('canvas');
   const ctx     = canvas.getContext('2d');
   const scoreEl = document.getElementById('score');
@@ -120,22 +126,30 @@
   const btnPause= document.getElementById('btn-pause');
   const btnRestart=document.getElementById('btn-restart');
 
-  // HiDPI crispness
-  function setupHiDPI() {
+  // ----- Responsive Canvas / HiDPI -----
+  function resizeCanvas() {
+    // Use the inner width of the board (content box) so canvas fills it.
+    const cssSide = Math.floor(board.clientWidth - 20); // subtract a tiny safety margin
+    CANVAS_CSS = cssSide > 140 ? cssSide : 140;         // clamp to a minimum size
+    // Keep the canvas square visually
+    canvas.style.width = CANVAS_CSS + 'px';
+    canvas.style.height = CANVAS_CSS + 'px';
+
+    // Device pixel ratio scaling for crisp rendering
     const dpr = window.devicePixelRatio || 1;
-    canvas.width  = CANVAS_BASE * dpr;
-    canvas.height = CANVAS_BASE * dpr;
-    canvas.style.width  = CANVAS_BASE + 'px';
-    canvas.style.height = CANVAS_BASE + 'px';
+    canvas.width  = Math.floor(CANVAS_CSS * dpr);
+    canvas.height = Math.floor(CANVAS_CSS * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Compute TILE from CSS size (integer for crisp grid lines)
+    TILE = Math.floor(CANVAS_CSS / GRID);
   }
-  setupHiDPI();
-  window.addEventListener('resize', setupHiDPI);
+  resizeCanvas();
+  window.addEventListener('resize', () => { resizeCanvas(); draw(); });
 
   // ----- Game State -----
-  let snake, dir, queuedDir, food, score, high, running, lastTime, acc, step, gameOver;
+  let snake, dir, queuedDir, food, score, high, running, lastTime, acc, step, gameOver, hasStarted;
 
-  // Target steps per second = speed; we compute ms per step
   function setSpeed(spd) { step = 1000 / spd; }
 
   // Initialize / Reset state
@@ -143,13 +157,14 @@
     snake = [{x:10, y:10},{x:9,y:10},{x:8,y:10}]; // start mid
     dir = {x:1, y:0}; queuedDir = {x:1, y:0};
     food = spawnFood();
-    score = 0; gameOver = false;
+    score = 0; gameOver = false; hasStarted = false;
     acc = 0; lastTime = performance.now();
     setSpeed(parseInt(speedEl.value, 10));
     scoreEl.textContent = score;
     high = parseInt(localStorage.getItem('snake_high') || '0', 10);
     highEl.textContent = high;
     draw(); // immediate draw
+    drawBanner('Press Arrow/WASD or Swipe to start');
   }
 
   function spawnFood() {
@@ -164,22 +179,69 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  // ----- Input -----
+  // ----- Input Helpers -----
+  function isReverse(nx, ny) {
+    return (nx === -dir.x && ny === -dir.y);
+  }
   function queueDir(nx, ny) {
-    // prevent reversing directly
-    if (nx === -dir.x && ny === -dir.y) return;
+    if (isReverse(nx, ny)) return;
     queuedDir = {x:nx, y:ny};
   }
+
+  function startIfNeeded() {
+    if (!running && !gameOver) {
+      hasStarted = true;
+      start();
+    }
+  }
+
+  // Keyboard input
   window.addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
-    if (k === 'arrowup' || k === 'w') queueDir(0,-1);
-    else if (k === 'arrowdown' || k === 's') queueDir(0,1);
-    else if (k === 'arrowleft' || k === 'a') queueDir(-1,0);
-    else if (k === 'arrowright' || k === 'd') queueDir(1,0);
-    else if (k === ' '){ togglePause(); }
-    else if (k === 'r'){ hardRestart(); }
+    if (k === 'arrowup' || k === 'w') { queueDir(0,-1); startIfNeeded(); }
+    else if (k === 'arrowdown' || k === 's') { queueDir(0,1); startIfNeeded(); }
+    else if (k === 'arrowleft' || k === 'a') { queueDir(-1,0); startIfNeeded(); }
+    else if (k === 'arrowright' || k === 'd') { queueDir(1,0); startIfNeeded(); }
+    else if (k === ' ') { togglePause(); }
+    else if (k === 'r') { hardRestart(); }
   });
 
+  // Touch swipe input
+  let touchStartX = 0, touchStartY = 0, touchActive = false;
+  const SWIPE_THRESH = 24; // pixels
+
+  board.addEventListener('touchstart', e => {
+    if (!e.touches || e.touches.length === 0) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX; touchStartY = t.clientY;
+    touchActive = true;
+  }, { passive: true });
+
+  board.addEventListener('touchmove', e => {
+    // Prevent page scroll while swiping on the game board
+    if (touchActive) e.preventDefault();
+  }, { passive: false });
+
+  board.addEventListener('touchend', e => {
+    if (!touchActive) return;
+    touchActive = false;
+    const t = (e.changedTouches && e.changedTouches[0]) || null;
+    if (!t) return;
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < SWIPE_THRESH) return;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      // horizontal
+      if (dx > 0) queueDir(1,0); else queueDir(-1,0);
+    } else {
+      // vertical
+      if (dy > 0) queueDir(0,1); else queueDir(0,-1);
+    }
+    startIfNeeded();
+  }, { passive: true });
+
+  // D-pad (click/tap)
   document.querySelectorAll('.dpad button').forEach(btn => {
     btn.addEventListener('click', () => {
       const d = btn.dataset.dir;
@@ -187,10 +249,12 @@
       if (d==='down') queueDir(0,1);
       if (d==='left') queueDir(-1,0);
       if (d==='right') queueDir(1,0);
+      startIfNeeded();
     });
   });
 
-  btnStart.addEventListener('click', start);
+  // Buttons & speed
+  btnStart.addEventListener('click', () => { startIfNeeded(); });
   btnPause.addEventListener('click', togglePause);
   btnRestart.addEventListener('click', hardRestart);
   speedEl.addEventListener('change', () => setSpeed(parseInt(speedEl.value,10)));
@@ -268,34 +332,38 @@
 
   // ----- Render -----
   function draw() {
+    // Canvas CSS side derived; draw in CSS pixel coordinates (transform already accounts for DPR)
+    const side = TILE * GRID;
+
     // clear
     ctx.fillStyle = '#081021';
-    ctx.fillRect(0,0, CANVAS_BASE, CANVAS_BASE);
+    ctx.fillRect(0, 0, side, side);
 
     // draw grid (subtle)
     ctx.strokeStyle = 'rgba(255,255,255,0.045)';
     ctx.lineWidth = 1;
-    for (let i=1;i<GRID;i++){
+    for (let i=1; i<GRID; i++){
       const p = i*TILE;
-      ctx.beginPath(); ctx.moveTo(p,0); ctx.lineTo(p,CANVAS_BASE); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0,p); ctx.lineTo(CANVAS_BASE,p); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(p,0); ctx.lineTo(p,side); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0,p); ctx.lineTo(side,p); ctx.stroke();
     }
 
     // food
-    drawCell(food.x, food.y, FOOD_COLOR, 6);
+    drawCell(food.x, food.y, FOOD_COLOR, Math.max(4, Math.floor(TILE*0.3)));
 
     // snake
     snake.forEach((seg, idx) => {
       const color = idx === 0 ? HEAD_COLOR : SNAKE_COLOR;
-      drawCell(seg.x, seg.y, color, idx === 0 ? 3 : 4);
+      drawCell(seg.x, seg.y, color, idx === 0 ? Math.max(3, Math.floor(TILE*0.2)) : Math.max(4, Math.floor(TILE*0.22)));
     });
   }
 
   function drawCell(x, y, color, inset=4) {
     const px = x*TILE, py = y*TILE;
+    const w = TILE - 2*inset, h = TILE - 2*inset;
     ctx.fillStyle = color;
-    const r = 6; // rounded rect
-    roundRect(ctx, px+inset, py+inset, TILE-2*inset, TILE-2*inset, r);
+    const r = Math.max(2, Math.floor(TILE*0.25)); // rounded corners scale with TILE
+    roundRect(ctx, px+inset, py+inset, w, h, r);
     ctx.fill();
   }
 
@@ -310,14 +378,17 @@
   }
 
   function drawBanner(text) {
+    const side = TILE * GRID;
     // overlay banner
     ctx.save();
     ctx.fillStyle = 'rgba(0,0,0,0.45)';
-    ctx.fillRect(0, CANVAS_BASE/2 - 36, CANVAS_BASE, 72);
+    const barH = Math.max(48, Math.floor(side * 0.16));
+    ctx.fillRect(0, (side - barH)/2, side, barH);
     ctx.fillStyle = '#e5e7eb';
-    ctx.font = '16px system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    ctx.font = `${Math.max(14, Math.floor(side*0.04))}px system-ui, -apple-system, Segoe UI, Roboto, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.fillText(text, CANVAS_BASE/2, CANVAS_BASE/2 + 5);
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, side/2, side/2);
     ctx.restore();
   }
 
