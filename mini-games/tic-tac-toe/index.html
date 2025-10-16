@@ -43,6 +43,8 @@
     #status {
       margin-top: 20px;
       font-size: 1.2em;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
     .buttons {
       margin-top: 20px;
@@ -83,6 +85,7 @@
     <div class="cell" data-index="7"></div>
     <div class="cell" data-index="8"></div>
   </div>
+
   <div id="status">Player X's turn</div>
 
   <div class="buttons">
@@ -98,6 +101,8 @@
     let gameActive = true;
     let gameState = ["", "", "", "", "", "", "", "", ""];
 
+    const COLORS = { X: "#3b82f6", O: "#ef4444" }; // blue, red
+
     const winningConditions = [
       [0,1,2],[3,4,5],[6,7,8],
       [0,3,6],[1,4,7],[2,5,8],
@@ -109,6 +114,7 @@
       if (gameState[index] !== "" || !gameActive) return;
       gameState[index] = currentPlayer;
       e.target.textContent = currentPlayer;
+      e.target.style.color = COLORS[currentPlayer];
       checkResult();
     }
 
@@ -121,18 +127,25 @@
           break;
         }
       }
+
       if (roundWon) {
         statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
+        statusText.style.color = COLORS[currentPlayer];
         gameActive = false;
         return;
       }
+
       if (!gameState.includes("")) {
         statusText.textContent = "It's a draw!";
+        statusText.style.color = "#facc15"; // yellow for draw
         gameActive = false;
         return;
       }
+
+      // switch player
       currentPlayer = currentPlayer === "X" ? "O" : "X";
       statusText.textContent = `Player ${currentPlayer}'s turn`;
+      statusText.style.color = COLORS[currentPlayer];
     }
 
     function resetGame() {
@@ -140,11 +153,18 @@
       gameActive = true;
       gameState = ["", "", "", "", "", "", "", "", ""];
       statusText.textContent = "Player X's turn";
-      board.forEach(cell => cell.textContent = "");
+      statusText.style.color = COLORS[currentPlayer];
+      board.forEach(cell => {
+        cell.textContent = "";
+        cell.style.color = "#000";
+      });
     }
 
     board.forEach(cell => cell.addEventListener("click", handleCellClick));
     resetBtn.addEventListener("click", resetGame);
+
+    // Initialize the color for X
+    statusText.style.color = COLORS[currentPlayer];
   </script>
 </body>
 </html>
