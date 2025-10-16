@@ -172,27 +172,50 @@
 </dialog>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Auto-fit any text/emojis inside .icon boxes
+  (function(){
+    function prepareIcon(el){
+      let span = el.querySelector('.emoji-fit');
+      if (!span) {
+        span = document.createElement('span');
+        span.className = 'emoji-fit';
+        // move existing text into the span
+        span.textContent = el.textContent.trim();
+        el.textContent = '';
+        el.appendChild(span);
+      }
+      return span;
+    }
 
-  const RULES = {
-    memory:`<strong>Card Memory</strong><br><br>• Flip two cards at a time.<br>• Match pairs to clear the board.<br>• Fewer moves = better score.`,
-    tictactoe:`<strong>Tic-Tac-Toe</strong><br><br>• Take turns as X and O.<br>• Align three to win.<br>• Full board = draw.`,
-    rps:`<strong>Rock-Paper-Scissors</strong><br><br>• Rock beats Scissors • Scissors beats Paper • Paper beats Rock.`,
-    snake:`<strong>Snake</strong><br><br>• Move with <b>W/A/S/D</b> keys or by <b>swiping</b> on touch screens.<br>• Press <b>F</b> to pause or resume, and <b>R</b> to restart.<br>• Eat food to grow longer — avoid hitting walls or yourself!`
-  };
-  const dlg=document.getElementById('rulesDlg');
-  const body=document.getElementById('dlgBody');
-  const title=document.getElementById('dlgTitle');
-  document.querySelectorAll('[data-rules]').forEach(b=>{
-    b.onclick=()=>{
-      const k=b.dataset.rules;
-      title.textContent='Rules — '+k.replace(/^\w/,c=>c.toUpperCase());
-      body.innerHTML=RULES[k]||'No rules yet.';
-      dlg.showModal();
-    };
-  });
-  document.getElementById('closeDlg').onclick=()=>dlg.close();
-  dlg.addEventListener('cancel',e=>{e.preventDefault();dlg.close();});
+    function scaleIcon(el){
+      const span = prepareIcon(el);
+      // reset any previous scaling before measuring
+      span.style.transform = 'scale(1)';
+      // small padding margin so it doesn't touch edges
+      const pad = 6;
+      const boxW = Math.max(0, el.clientWidth  - pad);
+      const boxH = Math.max(0, el.clientHeight - pad);
+      // measure natural content size
+      const sw = span.scrollWidth;
+      const sh = span.scrollHeight;
+      if (sw === 0 || sh === 0) return;
+      const scale = Math.min(1, boxW / sw, boxH / sh);
+      span.style.transform = `scale(${scale})`;
+    }
+
+    function fitAll(){
+      document.querySelectorAll('.icon').forEach(scaleIcon);
+    }
+
+    // Run now and on resize
+    window.addEventListener('load', fitAll);
+    window.addEventListener('resize', () => {
+      // debounce a bit for smoother resizing
+      clearTimeout(window.__iconFitTO);
+      window.__iconFitTO = setTimeout(fitAll, 60);
+    });
+  })();
 </script>
+
 </body>
 </html>
