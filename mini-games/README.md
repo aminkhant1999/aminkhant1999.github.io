@@ -1,23 +1,59 @@
-✨ Features & Highlights
+<h1 align="center">🎮 Mini Games Hub</h1>
 
-🎮 4 Classic Games, Rebuilt with Modern Web Tech
-Each game (Card Memory, Tic-Tac-Toe, Rock–Paper–Scissors, and Snake) is written in pure HTML, CSS, and JavaScript — no frameworks, just clean, efficient code.
+<p align="center">
+  <b>A fun collection of browser-based mini-games — built with HTML, CSS, and JavaScript.</b><br>
+  <sub>Lightweight • Responsive • Beginner-Friendly • AI-Assisted</sub>
+</p>
 
-📱 Fully Responsive Design
-Play seamlessly on desktop, tablet, or mobile. Layouts automatically adjust for screen size and touch input.
+---
 
-🧠 Interactive Logic & Real-Time Feedback
-Every game includes dynamic UI updates, animations, and instant win/draw detection for an engaging experience.
+## 🧩 Games Included
 
-🕹️ Custom Controls & Accessibility
-Keyboard and touch inputs are supported.
-Snake even includes pause, restart, and tap/swipe controls for mobile play.
+| 🎲 Game | 🕹️ Description | 💡 Tech Highlights |
+|:--|:--|:--|
+| 🧠 **Card Memory** | Flip and match pairs to clear the board. | Grid layout, DOM events, match logic |
+| ❌⭕ **Tic-Tac-Toe** | Classic two-player battle of X vs O. | Dynamic win detection, responsive board |
+| 🪨📄✂️ **Rock–Paper–Scissors** | Try your luck against the CPU. | Randomized logic, interactive feedback |
+| 🐍 **Snake** | Eat, grow, and avoid crashing. | Canvas rendering, keyboard + touch controls, local storage high scores |
 
-💾 Persistent High Scores
-Snake game saves your best score automatically using localStorage.
+---
 
-🧩 Clean Structure & Readable Code
-Each game lives in its own folder, with separate HTML/CSS/JS — making it easy to read, extend, or reuse.
+## ✨ Features & Highlights
 
-⚙️ AI-Assisted Development, Human Debugging
-The project was developed collaboratively with ChatGPT for idea generation and debugging — then refined, tested, and polished by me.
+✅ **4 Classic Games, Rebuilt from Scratch**  
+Each game is handcrafted in pure HTML, CSS, and Vanilla JS — simple, fast, and framework-free.
+
+📱 **Fully Responsive Design**  
+Optimized layouts adapt beautifully across desktop, tablet, and mobile devices.
+
+🕹️ **Interactive & Accessible Controls**  
+Keyboard and touch support (including swipes & taps in Snake).  
+
+💾 **High Scores That Stick**  
+Snake remembers your best score using `localStorage`.
+
+🧠 **AI + Human Collaboration**  
+Developed with ChatGPT for idea generation and logic optimization — then refined and debugged manually for precision.
+
+🧩 **Clean, Modular Codebase**  
+Each mini-game has its own folder for easy reading, editing, or reuse in future projects.
+
+---
+
+## 🧰 Tech Stack
+
+| Technology | Purpose |
+|:--|:--|
+| **HTML5** | Game structure & layout |
+| **CSS3 (Flexbox & Grid)** | Styling & responsiveness |
+| **Vanilla JavaScript (ES6)** | Game logic & interactivity |
+| **Canvas API** | Real-time rendering (Snake) |
+| **LocalStorage** | Saving scores persistently |
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/aminkhant1999/mini-games-hub.git
