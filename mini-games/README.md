@@ -56,4 +56,4 @@ Each mini-game has its own folder for easy reading, editing, or reuse in future 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/aminkhant1999/mini-games-hub.git
+   git clone https://github.com/aminkhant1999.github.io/mini-games.git
