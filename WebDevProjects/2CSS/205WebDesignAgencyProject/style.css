@@ -1,13 +1,14 @@
 body {
   font-family: "Poppins", sans-serif;
-  margin: 50px 50px 0 50px;
+  margin: 50px 50px 0 50px; /* top, right, bottom, left */
   background-color: #faf9f6;
-  display: flex;
-  flex-direction: column;
-  min-height: 95vh;
+  display: flex; /* use flexbox for layout */
+  flex-direction: column; /* stack children vertically */
+  min-height: 95vh; /* Ensure footer sticks to bottom if content is short */
 }
+
 .main {
-  flex: 1;
+  flex: 1; /* make the main content expand to fill available space */
 }
 
 h1 {
@@ -23,9 +24,10 @@ footer {
   width: 45%;
 }
 
+/* Style for images within tiles */
 .tile-image {
   height: 200px;
-  float: left;
+  float: left; /* float image to the left */
   margin-right: 50px;
 }
 
@@ -41,6 +43,7 @@ footer {
   color: midnightblue;
 }
 
+/* Responsive design for smaller screens */
 @media (max-width: 680px) {
   .logo {
     width: 100px;
@@ -53,12 +56,12 @@ footer {
 
   .card {
     width: 100%;
-    display: block;
+    display: block; /* make cards full width on small screens */
     margin-bottom: 30px;
     text-align: justify;
   }
   .tile-image {
-    float: none;
+    float: none; /* remove float on small screens */
     display: block;
     margin: 0 auto 20px auto;
   }

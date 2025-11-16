@@ -15,6 +15,8 @@
     Blue: #004592
     Yellow: #F9D01E
     */
+
+    /* Center the container on the page */
     body {
       display: flex;
       justify-content: center;
@@ -24,49 +26,59 @@
       padding: 0;
     }
 
+    /* Grid container styling */
     .container {
       height: 748px;
       width: 748px;
-      display: grid;
+      display: grid; /* Enable grid layout */
       background-color: #000;
-      grid-template-columns: 320px 198px 153px 50px;
-      grid-template-rows: 414px 130px 155px 22px;
-      gap: 9px;
+      grid-template-columns: 320px 198px 153px 50px; /* Define 4 columns with specified widths */
+      grid-template-rows: 414px 130px 155px 22px; /* Define 4 rows with specified heights */
+      gap: 9px; /* Space between grid items */
     }
 
+    /* Grid item styling */
     .item {
       background-color: #F0F1EC;
     }
 
+    /* Red square styling */
     .red {
       background-color: #E72F24;
     }
 
+    /* White square spanning 3 columns */
     .white1 {
       grid-column: span 3;
     }
 
+    /* White square spanning 2 rows */
     .white2 {
       grid-row: span 2;
     }
 
+    /* White square spanning specific grid area */
     .white3 {
-      grid-area: 2 / 2 / 4 /4
+      grid-area: 2 / 2 / 4 /4; /* row-start / column-start / row-end / column-end */
     }
 
+    /* Blue square with bottom border */
     .blue {
       background-color: #004592;
       border-bottom: 10px solid #000;
     }
 
+    /* White square spanning 2 rows */
     .white4 {
       grid-row: span 2;
     }
 
+    /* Yellow square styling */
     .yellow {
       background-color: #F9D01E;
     }
 
+    /* Black square styling */
     .black {
       background-color: #232629;
     }

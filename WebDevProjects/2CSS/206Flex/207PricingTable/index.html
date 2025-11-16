@@ -7,50 +7,59 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Global Styles */
     body {
       font-family: 'Sono', sans-serif;
     }
 
+    /* Flexbox Pricing Table Styles */
     .pricing-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      gap: 2rem;
+      /* the following 4 lines create a centered layout */
+      display: flex; /* Use flexbox for layout */
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically */
+      height: 100vh; /* Full viewport height */
+
+      gap: 2rem; /* Space between pricing plans */
     }
 
+    /* Each pricing plan styles */
     .pricing-plan {
-      flex: 1;
-      /* width: 400px; */
-      max-width: 400px;
+      flex: 1; /* Each plan takes equal space */
+      max-width: 400px; /* Limit max width */
       padding: 20px;
       background-color: #f2f2f2;
       border-radius: 5px;
       text-align: center;
     }
 
+    /* Plan title styles */
     .plan-title {
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 10px;
     }
 
+    /* Plan price styles */
     .plan-price {
       font-size: 48px;
       font-weight: bold;
       margin-bottom: 10px;
     }
 
+    /* Plan features styles */
     .plan-features {
-      list-style: none;
+      list-style: none; /* Remove default list styling */
       padding: 0;
       margin: 0;
     }
 
+    /* Plan features list item styles */
     .plan-features li {
       margin-bottom: 20px;
     }
 
+    /* Plan button styles */
     .plan-button {
       padding: 10px;
       background-color: #ff6600;
@@ -59,10 +68,11 @@
       border: none;
     }
 
+    /* Responsive adjustments */
     @media (max-width: 1250px) {
       .pricing-container {
-        flex-direction: column;
-        height: 100%;
+        flex-direction: column; /* Stack plans vertically */
+        height: 100%; /* Adjust height for vertical layout */
       }
     }
   </style>
