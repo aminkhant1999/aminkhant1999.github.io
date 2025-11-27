@@ -48,6 +48,8 @@ styles.css
 assets/
 └── images/
 
+---
+
 ## 📦 Box Model Essentials
 
 | Property   | Affects            | Location                        | Example                | Description                |
