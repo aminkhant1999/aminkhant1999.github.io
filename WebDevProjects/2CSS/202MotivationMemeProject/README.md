@@ -47,3 +47,22 @@ index.html
 styles.css
 assets/
 └── images/
+
+## 📦 Box Model Essentials
+
+| Property   | Affects            | Location                        | Example                | Description                |
+|------------|--------------------|----------------------------------|------------------------|----------------------------|
+| **Padding** | Inside the element | Between content and border       | `padding: 10px;`        | Creates inner spacing      |
+| **Border**  | Around padding     | Surrounds the element’s box      | `border: 2px solid red;`| Adds a visible outline     |
+| **Margin**  | Outside the element| Outside the border               | `margin: 20px;`         | Creates outer spacing      |
+
+---
+
+## 📐 Box-Sizing Comparison
+
+| Property        | Description                                | Example (Width = 200px, Padding = 20px, Border = 5px) |
+|-----------------|--------------------------------------------|--------------------------------------------------------|
+| `content-box`   | Width applies **only to the content area** | Total width = **250px**                               |
+| `border-box`    | Width applies to the **entire box**        | Total width = **200px**                               |
+
+> 💡 Recommended: Set `box-sizing: border-box;` globally for predi
