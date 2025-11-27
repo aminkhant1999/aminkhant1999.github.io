@@ -48,3 +48,26 @@ https://aminkhant1999.github.io/WebDevProjects/2CSS/203CSSFlagProject/index.html
 
 index.html
 style.css
+
+## 🧠 Core CSS Concepts
+
+| Concept                | Key Idea                                 | Example                 |
+|------------------------|-------------------------------------------|--------------------------|
+| **Specificity**        | Determines which CSS rule takes priority  | `#id` > `.class` > `tag` |
+| **Inheritance**        | Certain properties pass to children       | `color`, `font-family`   |
+| **Combining Selectors**| Target more precise relationships         | `div > p`, `h1 + p`      |
+| **Position: static**   | Default document flow                     | —                        |
+| **Position: relative** | Offsets from normal flow                  | `top: 10px`              |
+| **Position: absolute** | Positioned relative to nearest ancestor   | `top: 0; left: 0;`       |
+| **Position: fixed**    | Stays anchored to the viewport            | `top: 0`                 |
+| **Position: sticky**   | Acts relative until “stuck”               | `top: 10px`              |
+
+---
+
+### 💡 Pro Tips
+
+- Use **`!important` only when necessary** — it makes debugging harder.  
+- Apply **`position: relative`** to parent elements when positioning children absolutely.  
+- Use **grouped selectors** to avoid repeating shared styles.  
+- To debug specificity conflicts:  
+  Check the **Computed** tab in browser dev tools to see which rule wins.
