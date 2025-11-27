@@ -51,3 +51,33 @@ https://aminkhant1999.github.io/WebDevProjects/2CSS/206Flex/207PricingTable/inde
 index.html
 styles.css
 images/
+
+---
+
+## 📘 Common Flexbox Properties
+
+| Category  | Property        | Description                     |
+|-----------|-----------------|---------------------------------|
+| Container | `display`        | Enables flexbox layout          |
+| Container | `flex-direction` | Sets direction (row or column)  |
+| Container | `justify-content`| Horizontal alignment            |
+| Container | `align-items`    | Vertical alignment              |
+| Container | `flex-wrap`      | Allows items to wrap            |
+| Container | `align-content`  | Controls spacing on multiple rows |
+| Item      | `order`          | Changes the visual order        |
+| Item      | `flex-grow`      | Allows item to grow             |
+| Item      | `flex-shrink`    | Allows item to shrink           |
+| Item      | `flex-basis`     | Sets initial item size          |
+| Item      | `align-self`     | Overrides container alignment   |
+
+---
+
+### 💡 Tips
+
+- Flexbox is best for **1D layouts** (a row *or* a column)  
+  Use **CSS Grid** for **2D layouts** (rows *and* columns).
+- Always start by defining a **flex container**:
+  ```css
+  .container {
+    display: flex;
+  }
