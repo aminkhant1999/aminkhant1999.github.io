@@ -1,0 +1,150 @@
+  /* root variables */
+  :root{
+    --bg:#0b1220; 
+    --panel:#0f172a; 
+    --card:#0c1626; 
+    --muted:#94a3b8; 
+    --text:#e5e7eb;
+    --accent:#38bdf8; 
+    --accent-2:#22c55e; 
+    --border:#1e2a41; 
+    --hover:#122036;
+  }
+
+  /* global styles */
+  *{ box-sizing:border-box }
+
+  /* body styles */
+  body{
+    margin:0; 
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:radial-gradient(1200px 800px at 70% -10%, #162036, var(--bg)); 
+    color:var(--text);
+    display:flex; justify-content:center; align-items:center; min-height:100vh; /* center content vertically and horizontally */
+  }
+
+  /* main styles */
+  main{ 
+    width:min(1200px,94vw); /* responsive width */
+    padding:clamp(16px,3vw,28px); /* responsive padding */
+  }
+
+  /* header styles */
+  header{
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    text-align:center;
+    margin-bottom:clamp(14px,3vw,20px);
+  }
+
+  /* header text styles */
+  h1{
+    margin:0;
+    font-size:clamp(26px,5vw,42px);
+    letter-spacing:.3px;
+    color:var(--text);
+  }
+
+  /* header subtitle styles */
+  .sub{
+    color:var(--muted);
+    font-size:clamp(13px,2.5vw,15px); 
+    margin-top:4px;
+  }
+
+  /* Grid */
+  .grid{
+    display:grid; 
+    gap:clamp(12px,2vw,18px);
+    grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); 
+    /* Create a responsive grid that automatically fits as many columns of roughly 320px as will comfortably fit, 
+    but gracefully collapses to one full-width column on small screens */
+  }
+
+  /* Card styles */
+  .card{
+    background:linear-gradient(180deg, var(--card), #0a1324);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:clamp(14px,2vw,18px);
+
+    display:grid; 
+    grid-template-columns:70px 1fr auto;
+    align-items:center; 
+    gap:clamp(10px,2vw,16px);
+    transition:transform .12s ease,background .2s ease,border-color .2s ease; /* smooth hover effects */
+  }
+
+  /* Hover effect for cards */
+  .card:hover{ 
+    transform:translateY(-2px);
+    background:var(--hover); 
+    border-color:#2a3b5d; 
+  }
+
+  /* rock-paper-scissors icon styles */
+  #rpsIcon{
+    font-size:clamp(20px,2vw,26px);
+  }
+
+  /* responsive card layout for small screens */
+  @media(max-width:520px){
+    .card{ 
+      grid-template-columns:60px 1fr; 
+      grid-template-areas:
+      "icon title"
+      "icon desc"
+      "actions actions";
+    }
+
+    .icon{ grid-area:icon; }
+    .meta h2{ grid-area:title; }
+    .meta p{ grid-area:desc; }
+    .actions{ grid-area:actions; justify-content:flex-start; } /* align action buttons to the left on small screens */
+  }
+
+  /* icon styles */
+  .icon{
+    width:clamp(56px,8vw,68px); height:clamp(56px,8vw,68px); 
+    display:flex; justify-content:center; align-items:center; /* center emoji */
+    font-size:clamp(24px,4.5vw,32px);
+    line-height:1; /* prevent extra space below emoji */
+    padding:clamp(8px,1vw,12px);
+    background:#0d192d; border:1px solid var(--border); border-radius:14px;
+    overflow:hidden; /* ensure large emojis fit within the icon box */
+  }
+
+  .meta h2{ margin:0 0 6px; font-size:clamp(18px,3vw,20px); } /* title styles */
+  .meta p{ margin:0; color:var(--muted); font-size:clamp(13px,2.5vw,14px); } /* description styles */
+  .actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; } /* wrap action buttons and align to right */
+
+  /* button styles */
+  a.btn,button.btn{
+    background:#122036; color:var(--text); border:1px solid #263650;
+    padding:10px 14px; border-radius:10px; font-size:14px;
+    cursor:pointer; text-decoration:none;
+    transition:background .2s,border-color .2s,transform .08s; /* smooth button effects */
+  }
+  a.btn:hover,button.btn:hover{ background:#162745; border-color:#38557b; } /* hover effect for buttons */
+
+  /* footer styles */
+  footer{ margin-top:clamp(14px,3vw,20px); text-align:center; color:var(--muted); font-size:12px; }
+
+  /* dialog styles */
+  dialog{
+    border:none; border-radius:14px; width:min(560px,92vw);
+    background:linear-gradient(180deg,var(--panel),#0b1324);
+    color:var(--text);
+  }
+  .dlg-head{ padding:14px 16px; border-bottom:1px solid var(--border); font-weight:700; } /* dialog header styles */
+  .dlg-body{ padding:14px 16px; color:var(--muted); font-size:14px; } /* dialog body styles */
+  .dlg-actions{ padding:12px 16px; display:flex; justify-content:flex-end; border-top:1px solid var(--border); } /* dialog actions styles */
+  dialog::backdrop{ background:rgba(0,0,0,.55); } /* backdrop style for dialogs */
+
+  /* Light mode styles
+  @media(prefers-color-scheme:light){
+    :root{ --bg:#f5f7fb; --panel:#fff; --card:#fff; --text:#0b1320; --muted:#55627a; --border:#d7dfeb; --hover:#f3f7ff; }
+    body{ background:#f3f6fb; }
+    .icon{ background:#f3f7ff; }
+  } */
