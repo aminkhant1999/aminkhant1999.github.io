@@ -47,3 +47,23 @@ https://aminkhant1999.github.io/WebDevProjects/2CSS/205WebDesignAgencyProject/in
 index.html
 assets/
 └── images/
+
+---
+
+## 📐 Layout Basics: Display, Floats & Media Queries
+
+| Concept | Property / Feature | Description | Example |
+|--------|----------------------|-------------|---------|
+| **Display** | `display` | Controls how an element is rendered | `block`, `inline`, `flex`, `grid` |
+| **Float** | `float: left;` | Pushes element to left/right; content wraps around it | Common for image alignment |
+| **Clear** | `clear: both;` | Prevents elements from floating beside previous floats | Used in clearfix patterns |
+| **Media Queries** | `@media (max-width: 600px)` | Applies styles based on viewport size | Essential for responsive design |
+
+---
+
+### 💡 Quick Tips
+
+- Prefer **Flexbox** or **Grid** for layout instead of float-based designs.
+- When using floats, include a **clearfix** to prevent layout collapse.
+- Use media queries to adjust spacing, layout, and typography for mobile.
+- Stick to consistent breakpoints (e.g., 480px, 768px, 1024px).
