@@ -91,6 +91,7 @@ After running, the script will:
 
 ---
 
+# 🟩 Node.js Essential Concepts (Quick Reference)
 | Category | Command / Feature | Description | Example |
 | --- | --- | --- | --- |
 | Setup | `node -v` | Check installed Node.js version | `node -v` |
