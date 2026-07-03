@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rock • Paper • Scissors</title>
+  <style>
+    :root {
+      --bg:#0f172a; --panel:#0b1220; --card:#0d1628;
+      --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --info:#38bdf8;
+      --glow: 0 10px 30px rgba(56,189,248,.20);
+    }
+    *{ box-sizing:border-box }
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 800px at 70% -10%, #1e293b, var(--bg)),
+        linear-gradient(180deg, #0b1220, #0f172a);
+      color:var(--text);
+    }
+    main.game{
+      width:min(760px,94vw);
+      background: linear-gradient(180deg, var(--panel), #091527 70%);
+      border:1px solid #1f2937; border-radius:18px; padding:22px;
+      box-shadow: var(--glow);
+    }
+
+    /* Header */
+    .header {
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    h1{
+      margin:0; font-size: clamp(26px, 4vw, 36px);
+      display:flex; align-items:center; gap:10px;
+    }
+    h1 .emoji{ font-size:1.1em; filter: drop-shadow(0 2px 6px rgba(255,255,255,.12)); }
+    .sub{ color:var(--muted); margin:6px 0 14px; font-size:14px }
+
+    /* Top buttons */
+    .top-actions{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    a.btn{
+      text-decoration:none; color:var(--text);
+      background:#0f2036; border:1px solid #23324a; padding:10px 12px; border-radius:12px;
+      font-size:14px; display:inline-flex; align-items:center; gap:8px;
+      transition:transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    a.btn:hover{ background:#132a47; border-color:#325078; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(19,42,71,.35); }
+    a.btn:active{ transform: translateY(1px); }
+
+    /* Cards */
+    .row{ display:flex; gap:14px; flex-wrap:wrap; align-items:stretch; }
+    .card{
+      flex:1; min-width:280px; background: var(--card);
+      border:1px solid #1c2740; border-radius:16px; padding:14px;
+    }
+
+    /* Scoreboard */
+    .score{
+      display:grid; grid-template-columns: 1fr auto 1fr; align-items:center; text-align:center; gap:10px;
+      font-weight:800; font-size:22px;
+    }
+    .score small{ display:block; color:var(--muted); font-weight:600; font-size:12px }
+    .vs{
+      color:#cbd5e1; background:#0f2036; border:1px solid #21324f; padding:6px 10px; border-radius:999px; font-size:12px; letter-spacing:.4px;
+    }
+
+    /* Choice buttons – chunky + playful */
+    .controls{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:12px; }
+    button.choice{
+      cursor:pointer; background:#0f2036; color:var(--text); border:1px solid #23324a;
+      padding:14px 12px; border-radius:14px; font-size:16px;
+      display:grid; grid-template-columns: 34px 1fr; align-items:center; gap:10px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    button.choice span.emo{ font-size:24px; transform-origin:center; display:inline-block; }
+    button.choice:hover{ background:#153153; border-color:#2f4b73; transform: translateY(-2px) rotate(-0.4deg); box-shadow: 0 8px 18px rgba(21,49,83,.35); }
+    button.choice:hover .emo{ transform: rotate(-8deg) scale(1.05); }
+    button.choice:active{ transform: translateY(1px) }
+
+    /* Round details */
+    .result{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; align-items:center; font-size:15px; color:var(--muted);
+    }
+    .bubble{
+      background:#0e1a2b; border:1px solid #1f2b3f; border-radius:12px; padding:10px 12px; display:flex; align-items:center; gap:8px;
+    }
+
+    /* Banner */
+    .big{
+      margin-top:14px; padding:14px; text-align:center; font-size:18px; border-radius:12px; border:1px solid #1f2b3f;
+      background:#0c1626; min-height:56px;
+    }
+    .big.win{ border-color:#1d3b2a; background:linear-gradient(180deg,#0f2317,#0c1f17); color:#bbf7d0; }
+    .big.lose{ border-color:#3a1d22; background:linear-gradient(180deg,#2a1215,#1b0e10); color:#fecaca; }
+    .big.draw{ border-color:#263243; background:linear-gradient(180deg,#122033,#0d1a2a); color:#bae6fd; }
+
+    /* Bottom row */
+    .panel{ display:flex; gap:12px; align-items:center; justify-content:space-between; margin-top:12px; flex-wrap:wrap; }
+    .select, .reset{
+      background:#0f2036; color:var(--text); border:1px solid #1f2b3f; padding:10px 12px; border-radius:12px; font-size:14px;
+    }
+    .reset{ cursor:pointer; transition: background .2s, box-shadow .2s; }
+    .reset:hover{ background:#132a47; box-shadow: 0 6px 16px rgba(19,42,71,.35); }
+
+    .footer{ margin-top:12px; font-size:12px; color:var(--muted); text-align:center }
+
+    @media (max-width:560px){
+      .controls{ grid-template-columns: 1fr; }
+      .result{ grid-template-columns: 1fr; }
+      .score{ font-size:19px }
+    }
+  </style>
+</head>
+<body>
+  <main class="game" aria-live="polite">
+    <div class="header">
+      <h1><span class="emoji">🪨📄✂️</span> Rock • Paper • Scissors</h1>
+      <div class="top-actions">
+        <a class="btn" href="../index.html" aria-label="Back to Mini Games Home">🏠 Back to Home</a>
+      </div>
+    </div>
+    <div class="sub">Beat the computer. First to the target wins. Have fun!</div>
+
+    <section class="row">
+      <div class="card">
+        <div class="score" id="score">
+          <div>
+            You
+            <small id="youPick">—</small>
+            <div id="youScore">0</div>
+          </div>
+          <div class="vs">VS</div>
+          <div>
+            CPU
+            <small id="cpuPick">—</small>
+            <div id="cpuScore">0</div>
+          </div>
+        </div>
+
+        <div class="controls" role="group" aria-label="Choose your move">
+          <button class="choice" data-move="rock" aria-label="Rock">
+            <span class="emo">🪨</span><span>Rock</span>
+          </button>
+          <button class="choice" data-move="paper" aria-label="Paper">
+            <span class="emo">📄</span><span>Paper</span>
+          </button>
+          <button class="choice" data-move="scissors" aria-label="Scissors">
+            <span class="emo">✂️</span><span>Scissors</span>
+          </button>
+        </div>
+
+        <div class="result">
+          <div class="bubble"><strong>Your move:</strong> <span id="lastYou">—</span></div>
+          <div class="bubble"><strong>Computer:</strong> <span id="lastCpu">—</span></div>
+        </div>
+
+        <div id="banner" class="big draw">Make a move to start!</div>
+
+        <div class="panel">
+          <label class="select">Best of:
+            <select id="bestOf" aria-label="Best of">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="7">7</option>
+              <option value="9">9</option>
+            </select>
+          </label>
+          <button class="reset" id="reset">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Tip: Rock beats Scissors • Scissors beats Paper • Paper beats Rock</div>
+  </main>
+
+  <script>
+    const moves = ["rock", "paper", "scissors"];
+    const emojis = { rock:"🪨", paper:"📄", scissors:"✂️" };
+
+    const youScoreEl = document.getElementById("youScore");
+    const cpuScoreEl = document.getElementById("cpuScore");
+    const youPickEl  = document.getElementById("youPick");
+    const cpuPickEl  = document.getElementById("cpuPick");
+    const lastYouEl  = document.getElementById("lastYou");
+    const lastCpuEl  = document.getElementById("lastCpu");
+    const banner     = document.getElementById("banner");
+    const bestOfSel  = document.getElementById("bestOf");
+    const resetBtn   = document.getElementById("reset");
+
+    let you = 0, cpu = 0, locked = false;
+
+    function cpuMove() {
+      return moves[Math.floor(Math.random() * moves.length)];
+    }
+
+    function judge(p1, p2) {
+      if (p1 === p2) return "draw";
+      if ((p1 === "rock"     && p2 === "scissors") ||
+          (p1 === "paper"    && p2 === "rock")     ||
+          (p1 === "scissors" && p2 === "paper")) return "win";
+      return "lose";
+    }
+
+    function updateBanner(result, p1, p2) {
+      banner.className = "big " + (result === "win" ? "win" : result === "lose" ? "lose" : "draw");
+      const msg = {
+        win:  `✅ You win this round! ${emojis[p1]} beats ${emojis[p2]}.`,
+        lose: `❌ You lose this round. ${emojis[p2]} beats ${emojis[p1]}.`,
+        draw: `🤝 Draw. You both chose ${emojis[p1]}.`
+      }[result];
+      banner.textContent = msg;
+    }
+
+    function maybeEndMatch() {
+      const bestOf = parseInt(bestOfSel.value, 10);
+      const target = Math.floor(bestOf / 2) + 1;
+      if (you >= target || cpu >= target) {
+        locked = true;
+        const finalMsg = you > cpu ? "🏆 You win the match!" : "💀 You lost the match.";
+        banner.className = "big " + (you > cpu ? "win" : "lose");
+        banner.textContent = `${finalMsg} Final score: You ${you} - ${cpu} CPU.`;
+      }
+    }
+
+    function handleChoice(e) {
+      if (locked) return;
+      const p1 = e.currentTarget.dataset.move;
+      const p2 = cpuMove();
+
+      lastYouEl.textContent = `${emojis[p1]} ${p1}`;
+      lastCpuEl.textContent = `${emojis[p2]} ${p2}`;
+      youPickEl.textContent = emojis[p1];
+      cpuPickEl.textContent = emojis[p2];
+
+      const result = judge(p1, p2);
+      if (result === "win") you++;
+      if (result === "lose") cpu++;
+      youScoreEl.textContent = you;
+      cpuScoreEl.textContent = cpu;
+
+      updateBanner(result, p1, p2);
+      maybeEndMatch();
+    }
+
+    function reset() {
+      you = 0; cpu = 0; locked = false;
+      youScoreEl.textContent = "0";
+      cpuScoreEl.textContent = "0";
+      youPickEl.textContent = "—";
+      cpuPickEl.textContent = "—";
+      lastYouEl.textContent = "—";
+      lastCpuEl.textContent = "—";
+      banner.className = "big draw";
+      banner.textContent = "Make a move to start!";
+    }
+
+    document.querySelectorAll(".choice").forEach(btn => {
+      btn.addEventListener("click", handleChoice);
+    });
+    bestOfSel.addEventListener("change", reset);
+    resetBtn.addEventListener("click", reset);
+  </script>
+</body>
+</html>
