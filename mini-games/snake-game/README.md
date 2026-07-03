@@ -1,56 +1,83 @@
-# 🐍 Snake — HTML5 Canvas
+# 🐍 Snake
 
-A modern and responsive **Snake game** built with **HTML**, **CSS**, and **JavaScript (HTML5 Canvas)**.  
-Features smooth animations, keyboard and touch controls, adjustable speed, score tracking, and a persistent high score.
-
----
-
-## 🚀 Project Overview
-
-This browser-based game works as follows:
-
-1. Control the snake on a 20×20 grid  
-2. Eat the food to grow longer  
-3. Avoid hitting the walls and your own body  
-4. Adjust **speed** (Slow, Normal, Fast, Insane)  
-5. Track your **current score** and **high score** (saved in `localStorage`)  
-6. Play with **keyboard or touch controls**  
-
-Includes an **Instructions** modal and a **Back to Home** button for integration with a mini games hub.
+A modern implementation of the classic Snake game built with HTML5 Canvas and Vanilla JavaScript. The project includes responsive controls, adjustable speed, and persistent high scores.
 
 ---
 
-## 🧩 Key Concepts Practised
+## ✨ Features
 
-### 🟦 JavaScript & Game Loop
-- Using `requestAnimationFrame` for smooth updates  
-- Time-based game loop with variable speed  
-- Snake movement and growth logic  
-- Collision detection (walls & self)  
-- Random food spawning on grid  
-- High score persistence with `localStorage`  
-
-### 🟩 HTML5 Canvas
-- Drawing grid, snake, and food  
-- Custom rounded rectangles and overlays  
-- Drawing banners and wrapped text on canvas  
-
-### 🟥 UI & UX (HTML & CSS)
-- Responsive layout with a centered game panel  
-- Gradient background and card-style panel  
-- Score badges and speed selector  
-- Accessible dialog (`<dialog>`) for instructions  
-- Touch-friendly UI for mobile devices  
+- HTML5 Canvas rendering
+- Keyboard controls
+- Mobile swipe controls
+- Pause and restart
+- Adjustable speed
+- High score using localStorage
+- Responsive layout
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
 
-- **HTML5**
-- **CSS3**
-- **JavaScript (ES6)**
-- **HTML5 Canvas**
-- **localStorage**
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- HTML5 Canvas
+- localStorage
 
 ---
 
+## ⚙️ How It Works
+
+The snake moves continuously across a 20×20 grid. Each time it eats food, it grows longer and the score increases. The game ends if the snake collides with the wall or its own body. High scores are stored locally in the browser.
+
+---
+
+## 💻 Technical Concepts Practised
+
+- Canvas API
+- requestAnimationFrame
+- Collision Detection
+- Arrays
+- Animation Loop
+- localStorage
+- Touch Events
+
+---
+
+## 🎯 Skills Demonstrated
+
+- Game Development
+- Responsive Design
+- Browser APIs
+- Performance Optimization
+
+---
+
+## 🚀 What I Learned
+
+- Rendering with Canvas
+- Creating smooth animation loops
+- Handling keyboard and touch input
+- Persisting data with localStorage
+
+---
+
+## 🔮 Future Improvements
+
+- Obstacles
+- Multiple levels
+- Sound effects
+- Online leaderboard
+- Power-ups
+
+---
+
+## ▶️ Getting Started
+
+Open `index.html`.
+
+---
+
+## 👨‍💻 Author
+
+Aung Min Khant

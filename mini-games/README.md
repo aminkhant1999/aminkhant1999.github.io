@@ -1,99 +1,110 @@
-# 🎮 Mini Games Hub (Portfolio Project)
+# 🎮 Mini Games Hub
 
-A collection of lightweight browser games — **Card Memory**, **Tic-Tac-Toe**, **Rock–Paper–Scissors**, and **Snake** — built with **HTML**, **CSS**, and **Vanilla JavaScript (ES6)**.
+Mini Games Hub is a collection of browser-based games developed using **HTML, CSS, and Vanilla JavaScript**. The project was built to strengthen my front-end development skills by creating interactive applications without using external frameworks.
 
-This repo showcases **front-end fundamentals**, **DOM work**, **responsive layouts**, and **game logic**. It also includes a clean **Mini Games Hub** homepage with auto-fitting icon tiles and per-game rules dialogs.
-
----
-
-## 🧩 Games Included
-
-| Game | Description | Tech Highlights |
-|------|-------------|-----------------|
-| 🧠 **Card Memory** | Flip cards to find matching pairs. | Grid layout, flip animations, DOM updates |
-| ❌⭕ **Tic-Tac-Toe** | Classic two-player X vs O. | Win detection, game state handling |
-| 🪨📄✂️ **Rock–Paper–Scissors** | Best-of against CPU. | Randomized CPU logic, playful UI, feedback banner |
-| 🐍 **Snake** | Eat, grow, avoid collisions. | Canvas API, fixed-step loop, keyboard + touch controls |
+Each game focuses on different JavaScript concepts such as DOM manipulation, game state management, randomization, collision detection, Canvas rendering, and browser storage.
 
 ---
 
-## 💡 About This Project
+## ✨ Games Included
 
-Built as part of my learning journey with help from **AI assistance (ChatGPT)**.  
-All code was **reviewed, tested, debugged, and refined by me** for clarity, performance, and UX.
+### 🧠 Memory Game
+- Match pairs of cards
+- Random card shuffling
+- Move and match tracking
+- Responsive interface
 
-### Goals
-- Strengthen **HTML/CSS/JS** foundations  
-- Practice **responsive/accessible UI** patterns  
-- Translate ideas into working features quickly  
-- Publish a public **portfolio** with real projects
+### ❌⭕ Tic-Tac-Toe
+- Two-player gameplay
+- Win and draw detection
+- Dynamic game state updates
 
----
+### 🪨📄✂️ Rock Paper Scissors
+- Play against the computer
+- Random CPU selection
+- Best-of match system
+- Live scoreboard
 
-## ✨ Key Features
-
-- ✅ **Responsive**: Desktop, tablet, and mobile friendly  
-- 🎛️ **Hub page**: Game cards, rule popovers, auto-scaled icons  
-- 🎮 **Controls**: Keyboard, mouse, and touch (including swipes/taps)  
-- 💾 **Persistent scores**: `localStorage` for Snake high score  
-- 🧼 **Clean UI**: Minimal, focused designs per game  
-- 📴 **Offline-capable** once loaded in the browser
-
----
-
-## 🎮 Controls (Quick Reference)
-
-### Snake
-- **Move**: `W/A/S/D` or **swipe** (touch)  
-- **Pause/Play**: `F` or **tap** (when alive)  
-- **Restart**: `R` or **double-tap** (alive) / **single tap** (dead)  
-- Start banner: _“Press W/A/S/D or Swipe to start”_  
-- Death banner: _“You are dead. Press R to restart or tap to restart.”_
-
-### Tic-Tac-Toe
-- Click/tap a cell to play  
-- **Restart** button in the page  
-- **🏠 Back to Home** button on the page
-
-### Rock–Paper–Scissors
-- Click/tap **Rock / Paper / Scissors**  
-- Choose **Best-of** target, **Reset** to start a new match  
-- **🏠 Back to Home** button on the page  
-- Playful, arcade-style UI with feedback banner
-
-### Card Memory
-- Click/tap to flip cards  
-- Match all pairs to win (move counter shown)  
-- **New game** + **🏠 Back to Home** buttons in header
+### 🐍 Snake
+- HTML5 Canvas rendering
+- Keyboard and touch controls
+- Adjustable speed
+- High score saved using localStorage
 
 ---
 
-## 🗂️ Project Structure
-/ (repo root)
-│── index.html # Mini Games Hub (icons auto-fit, rules dialog)
-│── /snake-game/
-│ └── index.html # Canvas, WASD/F/R + touch controls, live banners
-│── /tic-tac-toe/
-│ └── index.html # X/O game + Restart + Back to Home
-│── /rock-paper-scissors/
-│ └── index.html # Playful UI, Best-of select, Reset + Back to Home
-│── /memory-game/
-│ └── index.html # Flip cards grid, New game + Back to Home
-│
-└── README.md
+## 🛠️ Tech Stack
 
-
-> Hub icons auto-fit using a small script that scales emoji/text within each icon tile to avoid overflow.
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- HTML5 Canvas
+- localStorage
+- Git & GitHub
 
 ---
 
-## 🛠️ Technologies
+## 📁 Project Structure
 
-- **HTML5** — Semantic structure  
-- **CSS3** — Flexbox, Grid, responsive units, light/dark friendly palette  
-- **JavaScript (ES6)** — DOM APIs, Canvas API (Snake), event handling  
-- **LocalStorage** — Snake high-score persistence
+```text
+Mini Games Hub/
+├── index.html
+├── styles.css
+├── memory-game/
+├── tic-tac-toe/
+├── rock-paper-scissors/
+└── snake-game/
+```
 
 ---
 
+## 💻 Technical Concepts Practised
+
+- Responsive Web Design
+- DOM Manipulation
+- Event Handling
+- CSS Grid & Flexbox
+- State Management
+- JavaScript Arrays & Objects
+- Canvas API
+- localStorage
+- Game Logic
+- Animation
+
+---
+
+## 🚀 What I Learned
+
+This project strengthened my understanding of JavaScript by building complete applications from scratch. It improved my ability to organize code, manage application state, create responsive interfaces, and solve programming problems through interactive games.
+
+---
+
+## 🔮 Future Improvements
+
+- Add AI opponents
+- Multiplayer support
+- Sound effects
+- Player profiles
+- Online leaderboard
+- React version
+- Unit testing
+
+---
+
+## ▶️ Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/aminkhant1999/aminkhant1999.github.io.git
+git clone git@github.com:aminkhant1999/aminkhant1999.github.io.git
+
+Open `index.html`.
+
+---
+
+## 👨‍💻 Author
+
+Aung Min Khant
+```
 
