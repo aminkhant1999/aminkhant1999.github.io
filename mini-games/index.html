@@ -1,350 +1,87 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="icon" href="favicon.ico" />
-    <link rel="apple-touch-icon" href="logo192.png" />
-    <link rel="manifest" href="manifest.json" />
-
-    <title>Aung Min Khant - Portfolio</title>
-    <meta name="keywords" content="Portfolio, Aung Min Khant, Tyler, Graduate Software Engineer, JavaScript, Full Stack Developer" />
-    <meta name="description"
-        content="Portfolio of Aung Min Khant (Tyler), a Computing Science graduate focused on JavaScript, full-stack web development, DevOps automation and software engineering projects." />
-
-    <link rel="stylesheet" href="css/resume.css?v=1.0.0" />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,700,900,600" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini Games Hub</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="leftcontent-wrapper">
-                        <img src="img/aboutme.png" alt="Aung Min Khant profile image" />
-                    </div>
-                    <div class="rightcontent-wrapper">
-                        <h1 class="hello">Hello, <small>I am</small></h1>
-                        <h1 class="name">Aung Min Khant (Tyler)</h1>
-                        <h4>Graduate Software Engineer | Full-Stack &amp; JavaScript Developer</h4>
-                        <div class="contact-wrapper">
-                            <div class="content">
-                                <a href="https://www.linkedin.com/in/tyler-aung-min-khant" target="_blank">
-                                    <i class="fa fa-laptop"></i><strong>LinkedIn</strong>
-                                </a>
-                            </div>
-                            <div class="content">
-                                <a href="https://github.com/aminkhant1999" target="_blank">
-                                    <i class="fa fa-github"></i><strong>GitHub</strong>
-                                </a>
-                            </div>
-                            <div class="content">
-                                <a href="mailto:aminkhant1999@gmail.com">
-                                    <i class="fa fa-envelope"></i> aminkhant1999@gmail.com
-                                </a>
-                            </div>
-                            <div class="content">
-                                <i class="fa fa-map-marker"></i> London, UK
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<main>
+  <!-- Header -->
+  <header>
+    <h1>🎮 Mini Games Hub</h1>
+    <div class="sub">Quick, fun browser games — no installs needed!</div>
+  </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+  <!-- Games Grid Section -->
+  <section class="grid">
+    <!-- Card Memory Game -->
+    <article class="card">
+      <div class="icon">🧠</div>
+      <div class="meta">
+        <h2>Card Memory</h2>
+        <p>Flip cards to find matching pairs.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="memory-game/index.html">Play</a>
+        <button class="btn" data-rules="memory">Rules</button>
+      </div>
+    </article>
 
-                <!-- About / Portfolio Introduction -->
-                <div class="content-section">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">
-                            About <br /> Me
-                        </h4>
-                    </div>
+    <!-- Tic-Tac-Toe Game -->
+    <article class="card">
+      <div class="icon">❌⭕</div>
+      <div class="meta">
+        <h2>Tic-Tac-Toe</h2>
+        <p>Classic X vs O — first to three in a row wins!</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="tic-tac-toe/index.html">Play</a>
+        <button class="btn" data-rules="tictactoe">Rules</button>
+      </div>
+    </article>
 
-                    <div class="rightcontent-wrapper">
-                        <p style="text-align: justify;">
-                            &nbsp; &nbsp; &nbsp; I am a Computing Science graduate with hands-on experience building full-stack web applications,
-                            JavaScript projects, database-driven systems and DevOps automation workflows. My portfolio focuses on practical
-                            projects that show how I design features, solve problems, test ideas, debug issues and improve user experience.
-                            I enjoy creating clean, maintainable software and I am looking for opportunities in graduate software engineering,
-                            web development or technology roles.
-                        </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+    <!-- Rock-Paper-Scissors Game -->
+    <article class="card">
+      <div class="icon" id="rpsIcon">🪨📄✂️</div>
+      <div class="meta">
+        <h2>Rock-Paper-Scissors</h2>
+        <p>Beat the CPU in a best-of match.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="rock-paper-scissors/index.html">Play</a>
+        <button class="btn" data-rules="rps">Rules</button>
+      </div>
+    </article>
 
-                <!-- Portfolio Highlights -->
-                <div class="content-section page-break">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">Portfolio <br /> Highlights</h4>
-                    </div>
+    <!-- Snake Game -->
+    <article class="card">
+      <div class="icon">🐍</div>
+      <div class="meta">
+        <h2>Snake</h2>
+        <p>Eat, grow, and avoid crashing — save your high score!</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="snake-game/index.html">Play</a>
+        <button class="btn" data-rules="snake">Rules</button>
+      </div>
+    </article>
+  </section>
 
-                    <div class="rightcontent-wrapper">
-                        <ul class="skill-metrics">
-                            <li><label><strong>Full-Stack Development</strong> - Built Prizemania with <b>10+ user-facing features</b> and a MySQL database.</label></li>
-                            <li><label><strong>JavaScript Projects</strong> - Created a Mini Games Hub with 4 browser games and <b>20+ gameplay features</b>.</label></li>
-                            <li><label><strong>DevOps Automation</strong> - Designed a CI/CD workflow using Docker, Jenkins, Ansible and Nagios.</label></li>
-                            <li><label><strong>Deep Learning</strong> - Built a vehicle detection and classification project with over <b>90% classification accuracy</b>.</label></li>
-                            <li><label><strong>Professional Strengths</strong> - Problem-solving, debugging, documentation, teamwork and continuous learning.</label></li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+  <footer>© <span id="year"></span> Mini Games. Built with HTML, CSS & JS.</footer>
+</main>
 
-                <!-- Technical Skills -->
-                <div class="content-section page-break">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">Technical <br /> Skills</h4>
-                    </div>
+<!-- Rules Dialog -->
+<dialog id="rulesDlg">
+  <div class="dlg-head" id="dlgTitle">Game Rules</div>
+  <div class="dlg-body" id="dlgBody">Loading…</div>
+  <div class="dlg-actions">
+    <button class="btn" id="closeDlg">Close</button>
+  </div>
+</dialog>
 
-                    <div class="rightcontent-wrapper">
-                        <ul class="skill-metrics">
-                            <li><label><strong>Languages</strong> - JavaScript, Python, C++, Bash</label></li>
-                            <li><label><strong>Frontend</strong> - HTML5, CSS3, Bootstrap, Responsive Design</label></li>
-                            <li><label><strong>Backend</strong> - Node.js, Express.js, PHP</label></li>
-                            <li><label><strong>Databases</strong> - MySQL, MongoDB, SQL</label></li>
-                            <li><label><strong>Tools</strong> - Git, GitHub, Docker, Jenkins, Ansible, Nagios</label></li>
-                            <li><label><strong>Software Engineering</strong> - REST APIs, OOP, Agile, CI/CD, Testing, Documentation</label></li>
-                            <li><label><strong>Operating Systems</strong> - Linux, macOS</label></li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+<script src="index.js"></script>
 
-                <!-- Featured Projects -->
-                <div class="content-section fadeInLeft">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">
-                            Featured <br /> Projects
-                        </h4>
-                    </div>
-
-                    <div class="rightcontent-wrapper">
-                        <div class="web-experiences">
-                            <h4>
-                                <b>Mini Games Hub</b> – JavaScript Browser Game Collection |
-                                <a href="https://aminkhant1999.github.io/mini-games/" target="_blank" style="text-decoration: underline;">Live Demo</a> |
-                                <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/mini-games" target="_blank" style="text-decoration: underline;">GitHub Repo</a>
-                            </h4>
-                            <p><b>Technologies:</b> JavaScript ES6 | Canvas API | LocalStorage | HTML | CSS</p>
-                            <hr />
-                            <ul class="two-columns-list">
-                                <li>
-                                    <div class="lllist">&bull; Developed a responsive web app containing four browser games: <b>Memory, Tic-Tac-Toe, Rock-Paper-Scissors and Snake</b>.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Implemented <b>20+ gameplay features</b> including collision detection, score persistence, touch controls and responsive layouts.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Improved the project through iterative testing, debugging and user-focused feature updates.<br /></div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <br /><br />
-
-                        <div class="web-experiences">
-                            <h4>
-                                <b>Prizemania</b> – Full-Stack Lucky Draw Web Application |
-                                <a href="https://github.com/aminkhant1999/PrizeMania" target="_blank" style="text-decoration: underline;">GitHub Repo</a>
-                            </h4>
-                            <p><b>Technologies:</b> HTML | CSS | JavaScript | Bootstrap | PHP | MySQL</p>
-                            <hr />
-                            <ul class="two-columns-list">
-                                <li>
-                                    <div class="lllist">&bull; Developed a full-stack web application with <b>10+ user-facing features</b> including authentication, prize management and winner selection.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Designed and normalised a MySQL database containing <b>5+ relational tables</b> for users, prizes and ticket management.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Applied Agile-inspired planning, testing and documentation to turn requirements into a working solution.<br /></div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <br /><br />
-
-                        <div class="devops-experiences">
-                            <h4>
-                                <b>DevOps &amp; Enterprise Automation</b> |
-                                <a href="https://docs.google.com/presentation/d/15XBsveQw1bduos_iUue1Gkco1HTbQlbe/edit?usp=sharing" target="_blank" style="text-decoration: underline;">Presentation</a>
-                            </h4>
-                            <p><b>Technologies:</b> Docker | Jenkins | Ansible | Nagios | GitHub</p>
-                            <hr />
-                            <ul class="two-columns-list">
-                                <li>
-                                    <div class="lllist">&bull; Designed and implemented a CI/CD pipeline integrating Docker, Jenkins, Ansible and Nagios.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Automated build, deployment and monitoring workflows using GitHub integration.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Developed understanding of software delivery, infrastructure automation and monitoring practices.<br /></div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <br /><br />
-
-                        <div class="final-project-experiences">
-                            <h4><b>Vision-Based Vehicle Detection</b> – Final Year Deep Learning Project</h4>
-                            <p><b>Technologies:</b> Python | CNN | Deep Learning | Computer Vision</p>
-                            <hr />
-                            <ul class="two-columns-list">
-                                <li>
-                                    <div class="lllist">&bull; Designed and implemented a deep learning system for automated vehicle detection and classification.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Achieved over <b>90% classification accuracy</b> using CNN-based image recognition.<br /></div>
-                                </li>
-                                <li>
-                                    <div class="lllist">&bull; Produced full technical documentation covering system design, testing, evaluation and project findings.<br /></div>
-                                    <div class="clearfix"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                </div>
-
-                <!-- What I Can Bring -->
-                <div class="content-section">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">What I <br /> Bring</h4>
-                    </div>
-
-                    <div class="rightcontent-wrapper">
-                        <ul class="two-columns-list additional-experiences">
-                            <li>
-                                <div class="lllist">&bull; Ability to learn quickly, break problems down and build working software from requirements.<br /></div>
-                            </li>
-                            <li>
-                                <div class="lllist">&bull; Practical project experience across frontend, backend, databases, DevOps and documentation.<br /></div>
-                            </li>
-                            <li>
-                                <div class="lllist">&bull; Strong communication and teamwork skills developed through technical projects and customer-facing roles.<br /></div>
-                            </li>
-                            <li>
-                                <div class="lllist">&bull; A growth mindset with interest in clean code, debugging, maintainability and continuous improvement.<br /></div>
-                                <div class="clearfix"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <!-- Education -->
-                <div class="content-section page-break">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">Education</h4>
-                    </div>
-
-                    <div class="rightcontent-wrapper">
-                        <ul class="two-columns-list education">
-                            <li>
-                                <div class="title">Jul 2024 <br /><small>2:1</small></div>
-                                <div class="lllist">
-                                    <strong><i class="fa fa-graduation-cap"></i> BSc (Hons) Computing, Birmingham City University</strong>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <div class="title">Apr 2023 <br /><small>Distinction</small></div>
-                                <div class="lllist">
-                                    <strong><i class="fa fa-graduation-cap"></i> Higher Diploma in Infocomm Technology, British United College</strong>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <div class="title">Feb 2020</div>
-                                <div class="lllist">
-                                    <strong><i class="fa fa-graduation-cap"></i> BSc Business Information System, University of Information Technology</strong>
-                                </div>
-                                <div class="clearfix"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <!-- Professional Experience -->
-                <div class="content-section">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">Professional <br /> Experience</h4>
-                    </div>
-
-                    <div class="rightcontent-wrapper">
-                        <ul class="two-columns-list additional-experiences">
-                            <li>
-                                <div class="lllist">
-                                    <strong>Front of House Team Member – TomTom Coffee House, London</strong> | Nov 2024 – Present
-                                </div>
-                                <div class="lllist">&bull; Deliver excellent customer service in a fast-paced environment while working closely with team members.<br /></div>
-                                <div class="lllist">&bull; Operate POS systems accurately and develop communication, organisation and problem-solving skills under pressure.<br /></div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <div class="lllist">
-                                    <strong>Crew Member – McDonald’s, London</strong> | May 2024 – Aug 2024
-                                </div>
-                                <div class="lllist">&bull; Worked efficiently during busy service periods while maintaining quality and service standards.<br /></div>
-                                <div class="clearfix"></div>
-                            </li>
-                            <li>
-                                <div class="lllist">
-                                    <strong>Kitchen Porter &amp; Front of House – Hakata Ramen + Bar, London</strong> | Sept 2024 – Jun 2025
-                                </div>
-                                <div class="lllist">&bull; Supported kitchen and front-of-house operations in a high-volume restaurant environment.<br /></div>
-                                <div class="clearfix"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="content-section">
-                    <div class="leftcontent-wrapper">
-                        <h4 class="content-title">Contact Me</h4>
-                    </div>
-
-                    <div class="rightcontent-wrapper">
-                        <h3>Let’s Connect <small>for graduate software, web development or technology opportunities.</small></h3>
-                        <img src="img/resume-arrow.png" class="resume-arrow" alt="arrow" />
-                        <img src="img/hand-drawing-circle.png" class="contact-circle" alt="circle decoration" />
-                        <div class="salary-contact-wrapper">
-                            <div class="email">
-                                &nbsp;<a href="mailto:aminkhant1999@gmail.com">
-                                    <i class="fa fa-envelope"></i>aminkhant1999@gmail.com
-                                </a>
-                            </div>
-                            <div class="phone"><i class="fa fa-mobile"></i> (+44) 7774418422</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <br /><br /><br /><br />
-    <br /><br /><br /><br />
 </body>
-
 </html>
