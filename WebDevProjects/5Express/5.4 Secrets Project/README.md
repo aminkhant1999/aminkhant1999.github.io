@@ -67,6 +67,7 @@ Follow these steps to run the project:
 1. Initialize a new Node project  
 ```bash
 npm init -y
+```
 
 2. Install required packages
 ```bash
