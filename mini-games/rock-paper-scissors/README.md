@@ -63,10 +63,10 @@ The player selects Rock, Paper, or Scissors. The computer randomly generates its
 - Statistics
 
 ---
+## ▶️ Play the Games
 
-## ▶️ Getting Started
-
-Open `index.html`.
+🎮 **Play here:**
+https://aminkhant1999.github.io/mini-games/rock-paper-scissors/index.html
 
 ---
 
