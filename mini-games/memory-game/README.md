@@ -76,9 +76,10 @@ A browser-based memory matching game built with HTML, CSS, and Vanilla JavaScrip
 
 ---
 
-## ▶️ Getting Started
+## ▶️ Play the Games
 
-Open https://aminkhant1999.github.io/mini-games/memory-game/index.html.
+🎮 **Play here:**
+https://aminkhant1999.github.io/mini-games/memory-game/index.html
 
 ---
 
