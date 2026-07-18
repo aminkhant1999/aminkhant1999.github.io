@@ -65,9 +65,10 @@ Players take turns placing X and O on a 3×3 board. After every move, the game c
 
 ---
 
-## ▶️ Getting Started
+## ▶️ Play the Game
 
-Open `index.html`.
+🎮 **Play here:**
+https://aminkhant1999.github.io/mini-games/tic-tac-toe/index.html
 
 ---
 
