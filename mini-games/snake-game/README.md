@@ -75,7 +75,7 @@ The snake moves continuously across a 20×20 grid. Each time it eats food, it gr
 ## ▶️ Play the Games
 
 🎮 **Play here:**
-https://aminkhant1999.github.io/snake-game/index.html
+https://aminkhant1999.github.io/mini-games/snake-game/index.html
 
 ---
 
