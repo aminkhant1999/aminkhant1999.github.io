@@ -91,20 +91,30 @@ This project strengthened my understanding of JavaScript by building complete ap
 
 ---
 
-## ▶️ Getting Started
+## ▶️ Play the Games
 
-Clone the repository:
+The Mini Games Hub is available online and does not require installation or downloading.
+
+🎮 **Play here:**
+https://aminkhant1999.github.io/mini-games/
+
+Open the link in a modern web browser and choose a game from the home page.
+
+---
+
+## 💻 Run Locally
+
+Developers who want to view or modify the source code can clone the repository:
 
 ```bash
-git clone https://github.com/aminkhant1999/aminkhant1999.github.io.git
-git clone git@github.com:aminkhant1999/aminkhant1999.github.io.git
+git clone https://github.com/aminkhant1999/aminkhant1999.github.io/mini-games.git
+```
 
-Open `index.html`.
+Then open the project folder and launch `index.html` in a browser.
 
 ---
 
 ## 👨‍💻 Author
 
-Aung Min Khant
-```
+**Aung Min Khant**
 
