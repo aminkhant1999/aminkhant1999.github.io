@@ -8,7 +8,7 @@
   :root { --bg:#0b1220; --panel:#0f172a; --grid:#0e1a2b; --snake:#22c55e; --head:#16a34a; --food:#f97316; --text:#e5e7eb; --muted:#93a3b8; }
   * { box-sizing: border-box; }
   body {
-    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    margin: 0; min-height: 100vh; display: grid; place-items: start center; padding:16px 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
     background: radial-gradient(1200px 700px at 70% -10%, #162036, var(--bg));
     color: var(--text);
@@ -41,9 +41,18 @@
     background:#122036; color:var(--text); border:1px solid #263650;
     padding:10px 12px; border-radius:10px; cursor:pointer; transition: background .2s, transform .08s, border-color .2s;
     font-size:14px; text-decoration:none;
+    min-height:44px;
   }
   .btn:hover { background:#162745; border-color:#38557b; }
   .hint { color:var(--muted); font-size:12px; text-align:center; margin-top:8px; }
+  .dpad { display:grid; grid-template-columns:repeat(3,48px); grid-template-rows:repeat(2,44px); gap:6px; justify-content:center; margin-top:10px; }
+  .dpad .btn { padding:6px; font-size:18px; font-weight:800; }
+  .dpad [data-dir="up"] { grid-column:2; }
+  .dpad [data-dir="left"] { grid-column:1; grid-row:2; }
+  .dpad [data-action="pause"] { grid-column:2; grid-row:2; font-size:14px; }
+  .dpad [data-dir="right"] { grid-column:3; grid-row:2; }
+  .quick-actions { display:flex; gap:8px; justify-content:center; margin-top:8px; }
+  @media (min-width:700px){ .dpad,.quick-actions{ display:none; } }
 
   dialog {
     border:none; border-radius:14px; width:min(560px,92vw);
@@ -86,10 +95,21 @@
       </div>
     </div>
 
+    <div class="dpad" aria-label="Touch direction controls">
+      <button class="btn" type="button" data-dir="up" aria-label="Move up">↑</button>
+      <button class="btn" type="button" data-dir="left" aria-label="Move left">←</button>
+      <button class="btn" type="button" data-action="pause" aria-label="Pause or resume">⏯</button>
+      <button class="btn" type="button" data-dir="right" aria-label="Move right">→</button>
+    </div>
+    <div class="quick-actions">
+      <button class="btn" type="button" data-dir="down" aria-label="Move down">↓ Move down</button>
+      <button class="btn" type="button" data-action="restart">Restart</button>
+    </div>
+
 
     <div class="hint">
-      Controls: <strong>W/A/S/D</strong> • Pause/Play: <strong>F</strong> • Restart: <strong>R</strong> •
-      Touch: <strong>Swipe</strong>=move, <strong>Tap</strong>=pause/play (alive), <strong>Double-tap</strong>=restart (alive), <strong>Tap</strong>=restart (dead)
+      Controls: <strong>W/A/S/D or arrow keys</strong> • Pause/Play: <strong>F</strong> • Restart: <strong>R</strong> •
+      Touch: <strong>buttons or swipe</strong> to move
     </div>
   </div>
 
@@ -99,7 +119,7 @@
     <div class="dlg-body">
       <p><strong>Goal:</strong> Eat food to grow longer. Don’t hit the walls or your own body.</p>
       <p><strong>Keyboard (Desktop):</strong><br>
-        Move: <code>W</code>/<code>A</code>/<code>S</code>/<code>D</code> (arrows disabled)<br>
+        Move: <code>W</code>/<code>A</code>/<code>S</code>/<code>D</code> or arrow keys<br>
         Pause/Play: <code>F</code><br>
         Restart: <code>R</code>
       </p>
@@ -146,7 +166,7 @@
     canvas.width = Math.floor(CANVAS_CSS * dpr);
     canvas.height = Math.floor(CANVAS_CSS * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    TILE = Math.floor(CANVAS_CSS / GRID);
+    TILE = CANVAS_CSS / GRID;
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
@@ -164,7 +184,7 @@
     high = parseInt(localStorage.getItem('snake_high') || '0', 10);
     highEl.textContent = high;
     draw();
-    drawBanner('Press W/A/S/D or Swipe to start');
+    drawBanner('Use W/A/S/D, arrows, swipe or buttons to start');
     ensureRAF();
   }
 
@@ -182,10 +202,10 @@
 
   window.addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
-    if (k==='w'){queueDir(0,-1);startIfNeeded();}
-    else if(k==='s'){queueDir(0,1);startIfNeeded();}
-    else if(k==='a'){queueDir(-1,0);startIfNeeded();}
-    else if(k==='d'){queueDir(1,0);startIfNeeded();}
+    if (k==='w'||k==='arrowup'){e.preventDefault();queueDir(0,-1);startIfNeeded();}
+    else if(k==='s'||k==='arrowdown'){e.preventDefault();queueDir(0,1);startIfNeeded();}
+    else if(k==='a'||k==='arrowleft'){e.preventDefault();queueDir(-1,0);startIfNeeded();}
+    else if(k==='d'||k==='arrowright'){e.preventDefault();queueDir(1,0);startIfNeeded();}
     else if(k==='f'){togglePause();}
     else if(k==='r'){hardRestart();}
   });
@@ -215,6 +235,12 @@
   },{passive:true});
 
   speedEl.addEventListener('change',()=>setSpeed(parseInt(speedEl.value,10)));
+  document.querySelectorAll('[data-dir]').forEach(button=>button.addEventListener('click',()=>{
+    const directions={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+    const [x,y]=directions[button.dataset.dir];queueDir(x,y);startIfNeeded();
+  }));
+  document.querySelector('[data-action="pause"]').addEventListener('click',togglePause);
+  document.querySelector('[data-action="restart"]').addEventListener('click',hardRestart);
   btnHelp.addEventListener('click',()=>helpDlg.showModal());
   btnCloseHelp.addEventListener('click',()=>helpDlg.close());
   helpDlg.addEventListener('cancel',e=>{e.preventDefault();helpDlg.close();});
@@ -229,7 +255,7 @@
     const dt=t-lastTime;lastTime=t;
     if(running){acc+=dt;while(acc>=step){update();acc-=step;if(gameOver){running=false;break;}}}
     draw();
-    if(!hasStarted&&!running&&!gameOver)drawBanner('Press W/A/S/D or Swipe to start');
+    if(!hasStarted&&!running&&!gameOver)drawBanner('Use W/A/S/D, arrows, swipe or buttons to start');
     else if(gameOver)drawBanner('You are dead. Press R to restart or tap to restart.');
     else if(!running&&hasStarted&&!gameOver)drawBanner('Paused — press F or tap to resume');
     requestAnimationFrame(loop);

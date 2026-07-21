@@ -20,13 +20,14 @@
     font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     background:radial-gradient(1200px 800px at 70% -10%, #162036, var(--bg)); 
     color:var(--text);
-    display:flex; justify-content:center; align-items:center; min-height:100vh; /* center content vertically and horizontally */
+    display:flex; justify-content:center; align-items:flex-start; min-height:100vh;
   }
 
   /* main styles */
   main{ 
     width:min(1200px,94vw); /* responsive width */
     padding:clamp(16px,3vw,28px); /* responsive padding */
+    margin-block:auto;
   }
 
   /* header styles */
@@ -125,8 +126,17 @@
     padding:10px 14px; border-radius:10px; font-size:14px;
     cursor:pointer; text-decoration:none;
     transition:background .2s,border-color .2s,transform .08s; /* smooth button effects */
+    min-height:44px;
   }
   a.btn:hover,button.btn:hover{ background:#162745; border-color:#38557b; } /* hover effect for buttons */
+
+  @media(max-width:360px){
+    main{ width:100%; }
+    .card{ grid-template-columns:52px 1fr; }
+    .icon{ width:52px; height:52px; }
+    .meta h2{ font-size:17px; }
+    .actions{ justify-content:flex-end; }
+  }
 
   /* footer styles */
   footer{ margin-top:clamp(14px,3vw,20px); text-align:center; color:var(--muted); font-size:12px; }
