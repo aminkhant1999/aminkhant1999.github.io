@@ -1,174 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Project Hub</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <title>Project Lab — Aung Min Khant</title>
+  <meta name="description" content="A collection of web development experiments and learning projects by graduate software engineer Aung Min Khant.">
+  <link rel="icon" href="../favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#101828; --muted:#667085; --paper:#f6f8fb; --card:#fff; --navy:#08111f; --blue:#2563eb; --cyan:#5eead4; --line:#dfe5ec; --max:1180px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:"DM Sans",sans-serif; line-height:1.6; }
+    a { color:inherit; }
+    .shell { width:min(calc(100% - 48px),var(--max)); margin-inline:auto; }
+    header { position:sticky; z-index:10; top:0; display:flex; justify-content:space-between; align-items:center; height:74px; padding-inline:max(24px,calc((100vw - var(--max))/2)); color:#fff; background:rgba(8,17,31,.95); border-bottom:1px solid #223047; backdrop-filter:blur(14px); }
+    .brand { font:700 23px "Space Grotesk",sans-serif; text-decoration:none; letter-spacing:-.04em; }
+    .brand span { color:var(--cyan); }
+    header nav { display:flex; gap:12px; align-items:center; }
+    header nav a { padding:9px 14px; color:#cbd5e1; border-radius:999px; font-size:14px; font-weight:700; text-decoration:none; }
+    header nav a:hover { color:#fff; background:#172235; }
+    header .back { border:1px solid #526078; }
+    .hero { padding:100px 0 80px; background:var(--navy); color:#fff; }
+    .eyebrow { margin:0 0 18px; color:var(--blue); font-size:12px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+    .hero .eyebrow { color:var(--cyan); }
+    h1,h2,h3 { margin-top:0; font-family:"Space Grotesk",sans-serif; line-height:1.08; letter-spacing:-.04em; }
+    h1 { max-width:820px; margin-bottom:24px; font-size:clamp(48px,7vw,84px); }
+    h2 { font-size:clamp(34px,4vw,50px); }
+    h3 { margin-bottom:12px; font-size:25px; }
+    .hero-copy { max-width:720px; margin:0; color:#a9b7ca; font-size:19px; }
+    .hero-stats { display:flex; flex-wrap:wrap; gap:12px; margin-top:38px; }
+    .hero-stats span { padding:7px 13px; color:#d7e2f0; border:1px solid #2c3b50; border-radius:999px; font-size:13px; }
+    main { padding:90px 0 110px; }
+    .section-head { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:end; margin-bottom:42px; }
+    .section-head p:last-child { max-width:520px; margin:0; color:var(--muted); }
+    .featured { display:grid; grid-template-columns:1fr .85fr; min-height:400px; overflow:hidden; margin-bottom:72px; color:#fff; border-radius:22px; background:linear-gradient(135deg,#1746bb,#2563eb); box-shadow:0 24px 70px rgba(37,99,235,.18); }
+    .featured-copy { padding:56px; }
+    .featured .eyebrow { color:#bdfcf1; }
+    .featured h2 { font-size:48px; }
+    .featured p { max-width:570px; color:#dce9ff; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .chips span { padding:5px 10px; color:#324052; background:#edf2f7; border-radius:999px; font-size:11px; font-weight:700; }
+    .featured .chips span { color:#fff; background:rgba(255,255,255,.15); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+    .button { display:inline-flex; align-items:center; min-height:47px; padding:0 18px; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; }
+    .button-light { color:var(--blue); background:#fff; }
+    .button-ghost { border:1px solid rgba(255,255,255,.48); }
+    .featured-art { position:relative; display:grid; grid-template-columns:repeat(2,100px); gap:16px; place-content:center; min-height:300px; background:rgba(5,18,51,.22); }
+    .game-tile { display:grid; place-items:center; aspect-ratio:1; border:1px solid rgba(255,255,255,.22); border-radius:20px; background:rgba(255,255,255,.11); font-size:40px; box-shadow:0 18px 35px rgba(3,12,35,.18); }
+    .game-tile:nth-child(2),.game-tile:nth-child(3) { transform:translateY(18px); }
+    .group { margin-top:72px; scroll-margin-top:100px; }
+    .group-title { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid var(--line); }
+    .group-title h2 { margin:0; font-size:33px; }
+    .group-title span { color:var(--muted); font-size:13px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .card { display:flex; flex-direction:column; min-height:300px; padding:30px; border:1px solid var(--line); border-radius:14px; background:var(--card); transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
+    .card:hover { transform:translateY(-4px); border-color:#b8c8dc; box-shadow:0 18px 36px rgba(16,24,40,.08); }
+    .number { margin:0 0 34px; color:var(--blue); font:700 12px "Space Grotesk"; letter-spacing:.1em; }
+    .card > p:not(.number) { margin:0; color:var(--muted); font-size:14px; }
+    .card .chips { margin-top:auto; padding-top:24px; }
+    .card-links { display:flex; gap:18px; margin-top:22px; }
+    .card-links a { color:var(--blue); font-size:13px; font-weight:700; text-underline-offset:4px; }
+    .wide { grid-column:span 2; }
+    .cta { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; margin-top:90px; padding:42px; color:#fff; border-radius:18px; background:var(--navy); }
+    .cta h2 { margin-bottom:8px; font-size:35px; }
+    .cta p { margin:0; color:#a9b7ca; }
+    footer { display:flex; justify-content:space-between; gap:20px; padding:28px max(24px,calc((100vw - var(--max))/2)); color:#94a3b8; background:var(--navy); font-size:13px; }
+    @media(max-width:850px){ .featured,.section-head{grid-template-columns:1fr}.featured-art{min-height:330px}.grid{grid-template-columns:repeat(2,1fr)}.wide{grid-column:span 2} }
+    @media(max-width:600px){ .shell{width:calc(100% - 32px)} header nav a:not(.back){display:none}.hero{padding:72px 0 60px}h1{font-size:48px}main{padding:65px 0 80px}.featured-copy{padding:34px 26px}.featured h2{font-size:38px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.cta{grid-template-columns:1fr;padding:30px}footer{flex-direction:column} }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
+  </style>
 </head>
-
 <body>
+  <header>
+    <a class="brand" href="../">AMK<span>.</span> Project Lab</a>
+    <nav aria-label="Project categories">
+      <a href="#frontend">Frontend</a>
+      <a href="#javascript">JavaScript</a>
+      <a href="#backend">Backend</a>
+      <a class="back" href="../">← Portfolio</a>
+    </nav>
+  </header>
 
-<header>
-    <h1>Tyler's Web Development Project Hub</h1>
-    <p>A collection of my mini projects, practice projects, and my <strong>Mini GameHub</strong></p>
-    <hr>
-</header>
+  <section class="hero">
+    <div class="shell">
+      <p class="eyebrow">Learning in public</p>
+      <h1>Small projects.<br>Real progress.</h1>
+      <p class="hero-copy">A collection of focused experiments that document my path from semantic HTML and modern CSS to interactive JavaScript and Node.js applications.</p>
+      <div class="hero-stats"><span>14 projects</span><span>Frontend → Backend</span><span>Source available</span><span>Responsive builds</span></div>
+    </div>
+  </section>
 
-<!-- HTML Projects -->
-<section>
-    <h2>🔵 HTML Projects</h2>
-    <ul>
-        <li>
-            <strong>HTML Portfolio Website</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/1Html/103HTMLPorfolioProject/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/1Html/103HTMLPorfolioProject/index.html" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A simple personal portfolio page built using clean and semantic HTML structure.</em>
-        </li>
-    </ul>
-    <hr>
-</section>
+  <main class="shell">
+    <div class="section-head">
+      <div><p class="eyebrow">Featured build</p><h2>More than coursework</h2></div>
+      <p>The Project Lab shows the smaller steps behind my featured portfolio work: experimenting, debugging, learning a technique and applying it in the next build.</p>
+    </div>
 
-<!-- CSS Projects -->
-<section>
-    <h2>🟣 CSS Projects</h2>
-    <ul>
-        <li>
-            <strong>Motivational Poster Website (Box Model)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/202MotivationMemeProject/" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/202MotivationMemeProject/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A centered poster-style layout demonstrating the CSS box model.</em>
-        </li>
+    <article class="featured">
+      <div class="featured-copy">
+        <p class="eyebrow">Interactive collection</p>
+        <h2>Mini Games Hub</h2>
+        <p>Four browser games brought together in one responsive experience, with keyboard and touch input, persistent scores, game-state logic and canvas rendering.</p>
+        <div class="chips"><span>JavaScript ES6</span><span>Canvas API</span><span>LocalStorage</span><span>Responsive CSS</span></div>
+        <div class="actions">
+          <a class="button button-light" href="../mini-games/">Play the games ↗</a>
+          <a class="button button-ghost" href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/mini-games" target="_blank" rel="noreferrer">View source ↗</a>
+        </div>
+      </div>
+      <div class="featured-art" aria-hidden="true"><div class="game-tile">🐍</div><div class="game-tile">✕○</div><div class="game-tile">🃏</div><div class="game-tile">✊</div></div>
+    </article>
 
-        <li>
-            <strong>CSS Flag (Positioning)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/203CSSFlagProject/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/203CSSFlagProject/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A flag graphic built purely with CSS using absolute and relative positioning.</em>
-        </li>
+    <section class="group" id="frontend">
+      <div class="group-title"><h2>HTML &amp; CSS foundations</h2><span>Layouts · Responsiveness · Visual systems</span></div>
+      <div class="grid">
+        <article class="card"><p class="number">01 / HTML</p><h3>Semantic Portfolio</h3><p>A first portfolio page focused on document structure, hierarchy and accessible HTML.</p><div class="chips"><span>HTML</span><span>Semantics</span></div><div class="card-links"><a href="../WebDevProjects/1Html/103HTMLPorfolioProject/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/1Html/103HTMLPorfolioProject" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">02 / CSS</p><h3>Motivational Poster</h3><p>A compact poster composition exploring spacing, borders and the CSS box model.</p><div class="chips"><span>Box model</span><span>Typography</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/202MotivationMemeProject/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/202MotivationMemeProject" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">03 / CSS</p><h3>CSS Flag</h3><p>A detailed flag illustration created entirely with nested elements and positioning.</p><div class="chips"><span>Positioning</span><span>Selectors</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/203CSSFlagProject/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/203CSSFlagProject" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">04 / CSS</p><h3>Design Agency</h3><p>A responsive agency landing page built with classic layout techniques and media queries.</p><div class="chips"><span>Responsive CSS</span><span>Media queries</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/205WebDesignAgencyProject/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/205WebDesignAgencyProject" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">05 / FLEXBOX</p><h3>Pricing Table</h3><p>A flexible three-tier pricing layout that adapts cleanly across screen sizes.</p><div class="chips"><span>Flexbox</span><span>Responsive UI</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/206Flex/207PricingTable/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/206Flex/207PricingTable" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">06 / GRID</p><h3>Mondrian Composition</h3><p>A geometric artwork reconstructed with CSS Grid tracks, gaps and fractional units.</p><div class="chips"><span>CSS Grid</span><span>Composition</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/207Grid/10.3%20Mondrian%20Project/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/207Grid/10.3%20Mondrian%20Project" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card wide"><p class="number">07 / BOOTSTRAP</p><h3>TinDog Landing Page</h3><p>A responsive product-style website using Bootstrap components, grid utilities, cards and mobile-first breakpoints.</p><div class="chips"><span>Bootstrap</span><span>Components</span><span>Mobile-first</span></div><div class="card-links"><a href="../WebDevProjects/2CSS/208Bootstrap/11.3%20TinDog%20Project/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/2CSS/208Bootstrap/11.3%20TinDog%20Project" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+      </div>
+    </section>
 
-        <li>
-            <strong>Web Design Agency Project</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/205WebDesignAgencyProject/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/205WebDesignAgencyProject/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A responsive landing page layout built using classic CSS display, floats, and media queries.</em>
-        </li>
+    <section class="group" id="javascript">
+      <div class="group-title"><h2>JavaScript interactions</h2><span>DOM · Events · Game logic</span></div>
+      <div class="grid">
+        <article class="card"><p class="number">08 / DOM</p><h3>JavaScript Exercises</h3><p>Focused language and DOM exercises used to practise core JavaScript concepts.</p><div class="chips"><span>JavaScript</span><span>DOM</span></div><div class="card-links"><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/3JavaScript/301JS/301JS.js" target="_blank" rel="noreferrer">View code ↗</a></div></article>
+        <article class="card"><p class="number">09 / RANDOMISATION</p><h3>Dice Challenge</h3><p>A two-player dice page that generates results and updates the winner dynamically.</p><div class="chips"><span>DOM updates</span><span>Random logic</span></div><div class="card-links"><a href="../WebDevProjects/3JavaScript/302DiceChallenge/dicee.html">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/3JavaScript/302DiceChallenge" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">10 / EVENTS</p><h3>Drum Kit</h3><p>An interactive soundboard responding to pointer and keyboard events with visual feedback.</p><div class="chips"><span>Event listeners</span><span>Audio</span></div><div class="card-links"><a href="../WebDevProjects/3JavaScript/303DrumKit/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/3JavaScript/303DrumKit" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card"><p class="number">11 / GAME LOGIC</p><h3>Simon Game</h3><p>A sequence-memory game with progressive rounds, state handling and animated feedback.</p><div class="chips"><span>jQuery</span><span>State</span><span>Animation</span></div><div class="card-links"><a href="../WebDevProjects/3JavaScript/304SimonGameChallenge/">Demo ↗</a><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/3JavaScript/304SimonGameChallenge" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card wide"><p class="number">12 / ALGORITHMS</p><h3>LeetCode Selections</h3><p>A curated set of problem-solving exercises demonstrating data structures, algorithms and the reasoning behind each solution.</p><div class="chips"><span>Algorithms</span><span>Problem solving</span></div><div class="card-links"><a href="https://github.com/aminkhant1999/LeetCodeSelections" target="_blank" rel="noreferrer">Explore solutions ↗</a></div></article>
+      </div>
+    </section>
 
-        <li>
-            <strong>Responsive Pricing Table (Flexbox)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/206Flex/207PricingTable/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/206Flex/207PricingTable/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A fully responsive pricing table layout designed with Flexbox.</em>
-        </li>
+    <section class="group" id="backend">
+      <div class="group-title"><h2>Node.js &amp; backend</h2><span>CLI · Express · Server logic</span></div>
+      <div class="grid">
+        <article class="card"><p class="number">13 / NODE.JS</p><h3>QR Code Generator</h3><p>A command-line tool that turns a supplied URL into a saved QR-code image.</p><div class="chips"><span>Node.js</span><span>CLI</span><span>npm</span></div><div class="card-links"><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/4Node/4.3%20QR%20Code%20Project" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+        <article class="card wide"><p class="number">14 / EXPRESS</p><h3>Protected Secrets Page</h3><p>A small Express application exploring middleware, form handling and server-side access control for protected content.</p><div class="chips"><span>Node.js</span><span>Express</span><span>Middleware</span></div><div class="card-links"><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/5Express/5.4%20Secrets%20Project" target="_blank" rel="noreferrer">Code ↗</a></div></article>
+      </div>
+    </section>
 
-        <li>
-            <strong>Mondrian Project (CSS Grid)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/207Grid/10.3%20Mondrian%20Project/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/207Grid/10.3%20Mondrian%20Project/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A Mondrian-style layout recreation using CSS Grid areas and fractions.</em>
-        </li>
+    <section class="cta"><div><h2>Ready for the production work?</h2><p>See the larger projects, technical outcomes and deployed applications on my main portfolio.</p></div><a class="button button-light" href="../#projects">View featured projects →</a></section>
+  </main>
 
-        <li>
-            <strong>TinDog Dating App (Bootstrap)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/2CSS/208Bootstrap/11.3%20TinDog%20Project/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/2CSS/208Bootstrap/11.3%20TinDog%20Project/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A responsive website built using the Bootstrap framework.</em>
-        </li>
-    </ul>
-    <hr>
-</section>
-
-<!-- JS Projects -->
-<section>
-    <h2>🟠 JavaScript Projects</h2>
-    <ul>
-        <li>
-            <strong>Javascript Exercises</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/3JavaScript/301JS/301JS.js" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/3JavaScript/301JS/301JS.js" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A simple browser dice game that updates the result dynamically.</em>
-        </li>
-
-        <li>
-            <strong>Dice Challenge</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/3JavaScript/302DiceChallenge/dicee.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/3JavaScript/302DiceChallenge/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A simple browser dice game that updates the result dynamically.</em>
-        </li>
-
-        <li>
-            <strong>Drum Kit</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/3JavaScript/303DrumKit/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/3JavaScript/303DrumKit/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>An interactive drum kit that responds to clicks and keyboard input.</em>
-        </li>
-
-        <li>
-            <strong>Simon Game (jQuery)</strong>
-            <a href="https://aminkhant1999.github.io/WebDevProjects/3JavaScript/304SimonGameChallenge/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/blob/main/WebDevProjects/3JavaScript/304SimonGameChallenge/" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A classic memory game built with jQuery animations and game logic.</em>
-        </li>
-        <li>
-            <strong>LeetCode Selections</strong>
-            <a href="https://github.com/aminkhant1999/LeetCodeSelections/tree/main" target="_blank">LeetCode Selections</a>
-            <br>
-            <em>A collection of my solutions to various LeetCode problems, showcasing my problem-solving skills and algorithmic thinking.</em>
-        </li>
-    </ul>
-    <hr>
-</section>
-
-<!-- Backend Projects -->
-<section>
-    <h2>🟤 Backend and APIs</h2>
-    <ul>
-        <li>
-            <strong>QR Code Generator (Node.js)</strong>
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/4Node/4.3%20QR%20Code%20Project" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A Node.js CLI tool that generates a QR code from a user-entered URL and saves it as an image.</em>
-        </li>
-
-        <li>
-            <strong>Password-Protected Website (Node.js + Express.js)</strong>
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/5Express/5.4%20Secrets%20Project" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A simple Express.js web app that restricts access to a secret page using password authentication.</em>
-        </li>
-    </ul>
-    <hr>
-</section>
-
-<!-- My Mini GameHub -->
-<section>
-    <h2>🟢 My Mini GameHub</h2>
-    <ul>
-        <li>
-            <strong>Mini GameHub</strong>
-            <a href="https://aminkhant1999.github.io/mini-games/index.html" target="_blank">Live Demo</a> | 
-            <a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/mini-games" target="_blank">GitHub Repo</a>
-            <br>
-            <em>A small collection of browser-based games built with HTML, CSS, and JavaScript.</em>
-        </li>
-    </ul>
-    <hr>
-</section>
-
-<!-- Footer -->
-<footer>
-    <p>© 2025 — Built by Me :)</p>
-</footer>
-
+  <footer><span>© 2026 Aung Min Khant</span><span>Built as a record of continuous learning.</span></footer>
 </body>
 </html>
