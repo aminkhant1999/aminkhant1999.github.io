@@ -45,6 +45,9 @@
     .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
     .chips span { padding:5px 10px; color:#324052; background:#edf2f7; border-radius:999px; font-size:11px; font-weight:700; }
     .featured .chips span { color:#fff; background:rgba(255,255,255,.15); }
+    .featured.songbook { background:linear-gradient(135deg,#0a2925,#176d58); box-shadow:0 24px 70px rgba(23,109,88,.2); }
+    .featured.songbook .featured-art { background:rgba(1,24,20,.25); }
+    .featured.songbook .game-tile { color:#b7ffe4; font-family:"Space Grotesk",sans-serif; }
     .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
     .button { display:inline-flex; align-items:center; min-height:47px; padding:0 18px; border-radius:8px; font-size:14px; font-weight:700; text-decoration:none; }
     .button-light { color:var(--blue); background:#fff; }
@@ -65,12 +68,23 @@
     .card-links { display:flex; gap:18px; margin-top:22px; }
     .card-links a { color:var(--blue); font-size:13px; font-weight:700; text-underline-offset:4px; }
     .wide { grid-column:span 2; }
+    .foundations-archive { margin-top:72px; border:1px solid var(--line); border-radius:18px; background:#fff; scroll-margin-top:100px; }
+    .foundations-archive > summary { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; padding:30px 34px; cursor:pointer; list-style:none; }
+    .foundations-archive > summary::-webkit-details-marker { display:none; }
+    .foundations-archive > summary::after { content:"＋"; display:grid; place-items:center; width:38px; height:38px; border-radius:50%; color:var(--blue); background:#eef4ff; font-size:22px; }
+    .foundations-archive[open] > summary::after { content:"−"; }
+    .archive-title strong { display:block; font:700 26px "Space Grotesk",sans-serif; letter-spacing:-.03em; }
+    .archive-title span { display:block; margin-top:5px; color:var(--muted); font-size:14px; }
+    .archive-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .archive-tags span { padding:4px 9px; color:#42526a; border-radius:999px; background:#edf2f7; font-size:11px; font-weight:700; }
+    .archive-content { padding:0 34px 38px; border-top:1px solid var(--line); }
+    .archive-content .group:first-child { margin-top:38px; }
     .cta { display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; margin-top:90px; padding:42px; color:#fff; border-radius:18px; background:var(--navy); }
     .cta h2 { margin-bottom:8px; font-size:35px; }
     .cta p { margin:0; color:#a9b7ca; }
     footer { display:flex; justify-content:space-between; gap:20px; padding:28px max(24px,calc((100vw - var(--max))/2)); color:#94a3b8; background:var(--navy); font-size:13px; }
     @media(max-width:850px){ .featured,.section-head{grid-template-columns:1fr}.featured-art{min-height:330px}.grid{grid-template-columns:repeat(2,1fr)}.wide{grid-column:span 2} }
-    @media(max-width:600px){ .shell{width:calc(100% - 32px)} header nav a:not(.back){display:none}.hero{padding:72px 0 60px}h1{font-size:48px}main{padding:65px 0 80px}.featured-copy{padding:34px 26px}.featured h2{font-size:38px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.cta{grid-template-columns:1fr;padding:30px}footer{flex-direction:column} }
+    @media(max-width:600px){ .shell{width:calc(100% - 32px)} header nav a:not(.back){display:none}.hero{padding:72px 0 60px}h1{font-size:48px}main{padding:65px 0 80px}.featured-copy{padding:34px 26px}.featured h2{font-size:38px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.foundations-archive>summary{grid-template-columns:1fr;padding:24px}.archive-content{padding:0 20px 26px}.cta{grid-template-columns:1fr;padding:30px}footer{flex-direction:column} }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
   </style>
 </head>
@@ -78,9 +92,8 @@
   <header>
     <a class="brand" href="../">AMK<span>.</span> Project Lab</a>
     <nav aria-label="Project categories">
-      <a href="#frontend">Frontend</a>
-      <a href="#javascript">JavaScript</a>
-      <a href="#backend">Backend</a>
+      <a href="#latest">Latest</a>
+      <a href="#foundations">Foundations</a>
       <a href="#systems">Systems</a>
       <a class="back" href="../">← Portfolio</a>
     </nav>
@@ -91,7 +104,7 @@
       <p class="eyebrow">Learning in public</p>
       <h1>Small projects.<br>Real progress.</h1>
       <p class="hero-copy">A collection of focused experiments that document my path from semantic HTML and modern CSS to interactive JavaScript and Node.js applications.</p>
-      <div class="hero-stats"><span>20 projects</span><span>Frontend → Backend</span><span>Systems &amp; AI</span><span>Source available</span></div>
+      <div class="hero-stats"><span>21 projects</span><span>3 live applications</span><span>Systems &amp; AI</span><span>Source available</span></div>
     </div>
   </section>
 
@@ -100,6 +113,20 @@
       <div><p class="eyebrow">Selected builds</p><h2>From experiments to production</h2></div>
       <p>The Project Lab brings together production applications, university work and the smaller experiments behind them: learning a technique, debugging it and applying it in the next build.</p>
     </div>
+
+    <article class="featured songbook" id="latest">
+      <div class="featured-copy">
+        <p class="eyebrow">Latest production project</p>
+        <h2>Aung Songbook</h2>
+        <p>A public music-practice and learning platform with a searchable song library, automatic chord-sheet parsing, inverse capo and key controls, protected publishing workflows and interactive theory lessons.</p>
+        <div class="chips"><span>Node.js</span><span>Express</span><span>SQLite</span><span>Vanilla JavaScript</span><span>8 tests</span></div>
+        <div class="actions">
+          <a class="button button-light" href="https://aung-songbook.aminkhant1999.chatgpt.site" target="_blank" rel="noreferrer">Open live songbook ↗</a>
+          <a class="button button-ghost" href="https://github.com/aminkhant1999/AungSongBook" target="_blank" rel="noreferrer">View source ↗</a>
+        </div>
+      </div>
+      <div class="featured-art" aria-hidden="true"><div class="game-tile">𝄞</div><div class="game-tile">♯</div><div class="game-tile">♪</div><div class="game-tile">♭</div></div>
+    </article>
 
     <article class="featured">
       <div class="featured-copy">
@@ -129,6 +156,11 @@
       <div class="featured-art" aria-hidden="true"><div class="game-tile">🐍</div><div class="game-tile">✕○</div><div class="game-tile">🃏</div><div class="game-tile">✊</div></div>
     </article>
 
+    <details class="foundations-archive" id="foundations">
+      <summary>
+        <span class="archive-title"><strong>Web development foundations</strong><span>Earlier focused builds remain available without competing with the production work.</span><span class="archive-tags"><span>HTML &amp; CSS</span><span>JavaScript interactions</span><span>Node.js &amp; backend</span><span>14 projects</span></span></span>
+      </summary>
+      <div class="archive-content">
     <section class="group" id="frontend">
       <div class="group-title"><h2>HTML &amp; CSS foundations</h2><span>Layouts · Responsiveness · Visual systems</span></div>
       <div class="grid">
@@ -160,6 +192,8 @@
         <article class="card wide"><p class="number">14 / EXPRESS</p><h3>Protected Secrets Page</h3><p>A small Express application exploring middleware, form handling and server-side access control for protected content.</p><div class="chips"><span>Node.js</span><span>Express</span><span>Middleware</span></div><div class="card-links"><a href="https://github.com/aminkhant1999/aminkhant1999.github.io/tree/main/WebDevProjects/5Express/5.4%20Secrets%20Project" target="_blank" rel="noreferrer">Code ↗</a></div></article>
       </div>
     </section>
+      </div>
+    </details>
 
     <section class="group" id="systems">
       <div class="group-title"><h2>Systems, DevOps &amp; research</h2><span>Delivery · Data · Applied AI</span></div>
@@ -175,5 +209,18 @@
   </main>
 
   <footer><span>© 2026 Aung Min Khant</span><span>Built as a record of continuous learning.</span></footer>
+  <script>
+    const foundations = document.querySelector("#foundations");
+    const foundationIds = new Set(["foundations", "frontend", "javascript", "backend"]);
+    const revealFoundation = () => {
+      const id = location.hash.slice(1);
+      if (foundationIds.has(id)) {
+        foundations.open = true;
+        requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+      }
+    };
+    revealFoundation();
+    addEventListener("hashchange", revealFoundation);
+  </script>
 </body>
 </html>
