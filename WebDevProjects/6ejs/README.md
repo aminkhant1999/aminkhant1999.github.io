@@ -2,7 +2,7 @@
 
 A simple **Band Name Generator** built using **Node.js**, **Express**, **EJS**, and **body-parser**.
 
-Users enter a word describing a street name and a pet name, and the application combines them to generate a fun, fictional band name using server-side rendering with **EJS**.
+Users enter two words (a **street name** and a **pet name**), and the application generates a fun fictional band name by combining the two inputs using **server-side rendering**.
 
 ---
 
@@ -10,35 +10,39 @@ Users enter a word describing a street name and a pet name, and the application 
 
 This project demonstrates:
 
-1. Setting up an Express server
-2. Rendering dynamic pages with EJS
-3. Receiving form data using body-parser
-4. Passing data from the server to the view
-5. Using ES Modules (`import` syntax)
+1. Building a web server with Express
+2. Rendering dynamic HTML using EJS templates
+3. Handling user input through HTML forms
+4. Processing POST requests with body-parser
+5. Passing data from the backend to the frontend
+6. Organizing an Express application using `views` and `public` folders
+7. Using ES Modules (`import` syntax)
 
-When the user submits the form, the server combines the two inputs into a single band name and renders the result on the page.
+After submitting the form, the server processes the input and displays the generated band name on the page.
 
 ---
 
 ## 🧩 Key Concepts Practised
 
 ### 🟦 Express.js
-- `app.get()` for serving the homepage
+- Creating an Express server
+- `app.get()` for rendering the homepage
 - `app.post()` for handling form submissions
-- Running a web server with Express
+- Serving static files using `express.static()`
 
-### 🟩 EJS Templating
-- Rendering dynamic HTML
-- Embedding JavaScript inside HTML
-- Passing variables using `res.render()`
+### 🟩 EJS (Embedded JavaScript)
+- Dynamic HTML rendering
+- Passing variables with `res.render()`
+- Embedding JavaScript inside HTML templates
+- Creating reusable layouts using partials
 
 ### 🟨 Body-Parser
-- Reading form input from POST requests
-- Using `bodyParser.urlencoded()`
+- Reading data submitted from HTML forms
+- Using `bodyParser.urlencoded({ extended: true })`
 
 ### 🟥 Server-Side Rendering
 - Processing user input on the server
-- Sending dynamic content back to the browser
+- Generating dynamic content before sending it to the browser
 - Separating application logic from presentation
 
 ---
@@ -46,54 +50,62 @@ When the user submits the form, the server combines the two inputs into a single
 ## 🛠️ Technologies Used
 
 - **Node.js**
-- **Express**
+- **Express.js**
 - **EJS**
 - **body-parser**
-- **HTML**
-- **CSS**
+- **HTML5**
+- **CSS3**
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-project-folder/
-├── views/
-│   └── index.ejs
+6.3BandGeneratorProject/
 ├── public/
 │   └── styles/
 │       └── main.css
+│
+├── views/
+│   ├── partials/
+│   │   ├── header.ejs
+│   │   └── footer.ejs
+│   └── index.ejs
+│
 ├── index.js
 ├── package.json
-└── package-lock.json
+├── package-lock.json
+└── README.md
 ```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-Follow these steps to run the project:
+Follow these steps to run the project locally.
 
-### 1. Initialize a new Node project
+### 1. Clone the repository
 
 ```bash
-npm init -y
+git clone https://github.com/aminkhant1999/aminkhant1999.github.io.git
 ```
 
-### 2. Install required packages
+### 2. Navigate to the project
+
+```bash
+cd aminkhant1999.github.io/WebDevProjects/6ejs/6.3BandGeneratorProject
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+Or manually install the required packages:
 
 ```bash
 npm install express ejs body-parser
-```
-
-### 3. Enable ES Modules
-
-Open **package.json** and add:
-
-```json
-{
-  "type": "module"
-}
 ```
 
 ### 4. Start the server
@@ -102,7 +114,7 @@ Open **package.json** and add:
 node index.js
 ```
 
-Or, if using Nodemon:
+Or, if you have Nodemon installed:
 
 ```bash
 nodemon index.js
@@ -112,46 +124,52 @@ nodemon index.js
 
 ## ▶️ Usage
 
-After starting the server, open:
+Open your browser and visit:
 
 ```
 http://localhost:3000
 ```
 
-1. Enter a **Street Name**
-2. Enter a **Pet Name**
-3. Click **Generate**
+Enter:
 
-The application will combine the two inputs and display your generated band name.
+- A **Street Name**
+- A **Pet Name**
+
+Click **Generate**.
+
+The application will instantly display your generated band name.
 
 ### Example
 
 **Input**
 
-- Street Name: `Sunny`
-- Pet Name: `Tiger`
+```
+Street Name: Sunset
+Pet Name: Tiger
+```
 
-**Output**
+**Generated Band Name**
 
 ```
-Sunny Tiger
+Sunset Tiger
 ```
 
 ---
 
 ## 🎯 Learning Outcomes
 
-This project helped reinforce:
+Through this project, I practised:
 
-- Building an Express server
-- Creating dynamic web pages with EJS
+- Building web applications with Express.js
+- Creating dynamic pages using EJS
 - Handling form submissions
-- Passing data from backend to frontend
-- Understanding server-side rendering
-- Organizing Express projects with `views` and `public` folders
+- Using middleware to process request data
+- Passing data between the server and templates
+- Organizing Express applications with reusable partials
+- Understanding the basics of server-side rendering
 
 ---
 
 ## 📚 Course
 
-Created as part of **The Complete Full-Stack Web Development Bootcamp** by **Dr. Angela Yu**, focusing on learning **EJS templating** and **Express.js** fundamentals.
+Created as part of **The Complete Full-Stack Web Development Bootcamp** by **Dr. Angela Yu**, focusing on learning **Express.js**, **EJS**, and **server-side rendering** fundamentals.
