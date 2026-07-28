@@ -168,8 +168,3 @@ Through this project, I practised:
 - Organizing Express applications with reusable partials
 - Understanding the basics of server-side rendering
 
----
-
-## 📚 Course
-
-Created as part of **The Complete Full-Stack Web Development Bootcamp** by **Dr. Angela Yu**, focusing on learning **Express.js**, **EJS**, and **server-side rendering** fundamentals.
