@@ -1,10 +1,10 @@
 # 👋 Aung Min Khant (Tyler)
 
-> Computing Science Graduate | Aspiring Software Engineer | London, UK
+> Computing Graduate | Entry-Level IT Support | CompTIA A+ in progress | London, UK
 
 Welcome to my GitHub portfolio repository.
 
-This repository contains my personal portfolio website along with my featured software projects and ongoing learning journey.
+This repository contains my personal portfolio website, support-focused technical projects and ongoing learning journey towards an IT Support career.
 
 ---
 
@@ -14,7 +14,7 @@ Visit my portfolio here:
 
 👉 **https://aminkhant1999.github.io/**
 
-The portfolio introduces me, my technical skills, academic background, and featured software engineering projects.
+The portfolio introduces my IT support direction, CompTIA A+ study, customer-service background, technical foundation and hands-on projects.
 
 ---
 
@@ -139,7 +139,14 @@ New projects will continue to be added as I develop my software engineering skil
 
 ---
 
-# 💻 Technical Skills
+# 💻 Technical Foundation
+
+### IT Support and Networking Knowledge
+
+- Hardware and peripherals
+- Windows, macOS and Linux fundamentals
+- TCP/IP, IPv4, DNS, DHCP, Wi-Fi and LANs
+- Fault isolation, software installation and documentation
 
 ### Languages
 
@@ -176,17 +183,9 @@ New projects will continue to be added as I develop my software engineering skil
 
 ---
 
-# 🎯 Currently Working On
+# 🎯 Current Direction
 
-I'm currently building a full-stack **Ticket Management System** using:
-
-- JavaScript
-- Node.js
-- Express.js
-- SQL
-- REST APIs
-
-This project will become my flagship portfolio application.
+I'm currently studying CompTIA A+ and seeking my first IT Support, IT Technician, Helpdesk or Service Desk role. My longer-term goal is to progress towards infrastructure, cloud or DevOps after building strong first-line support experience.
 
 ---
 
