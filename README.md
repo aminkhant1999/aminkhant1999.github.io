@@ -1,10 +1,11 @@
+
 # 👋 Aung Min Khant (Tyler)
 
-> Computing Graduate | Entry-Level IT Support | CompTIA A+ in progress | London, UK
+> Computing Graduate | Software Engineering & Web Development | IT Support & Networking | CompTIA A+ in Progress | Future Cloud/DevOps | London, UK
 
 Welcome to my GitHub portfolio repository.
 
-This repository contains my personal portfolio website, support-focused technical projects and ongoing learning journey towards an IT Support career.
+This repository contains my portfolio website and technical projects across full-stack development, testing, deployment, IT support, networking and DevOps foundations.
 
 ---
 
@@ -14,7 +15,7 @@ Visit my portfolio here:
 
 👉 **https://aminkhant1999.github.io/**
 
-The portfolio introduces my IT support direction, CompTIA A+ study, customer-service background, technical foundation and hands-on projects.
+The portfolio presents my software engineering and web development projects, IT support and networking knowledge, CompTIA A+ study, customer-service background and future cloud/DevOps interests.
 
 ---
 
@@ -185,7 +186,7 @@ New projects will continue to be added as I develop my software engineering skil
 
 # 🎯 Current Direction
 
-I'm currently studying CompTIA A+ and seeking my first IT Support, IT Technician, Helpdesk or Service Desk role. My longer-term goal is to progress towards infrastructure, cloud or DevOps after building strong first-line support experience.
+I'm open to graduate and entry-level opportunities in software engineering, web development, IT support and technical support. I'm currently studying CompTIA A+ and strengthening my networking knowledge, with a longer-term interest in cloud infrastructure and DevOps.
 
 ---
 
